@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto">
+  <div>
     Here will be dragons...
   </div>
 </template>

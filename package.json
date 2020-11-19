@@ -11,6 +11,7 @@
   "dependencies": {
     "autoprefixer": "^9.8.6",
     "gridsome": "^0.7.22",
+    "jimp": "^0.16.1",
     "tailwindcss": "^2.0.1-compat"
   },
   "devDependencies": {

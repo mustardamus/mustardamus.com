@@ -5,3 +5,4 @@ dist
 src/.temp
 .env
 .env.*
+static/travels

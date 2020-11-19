@@ -14,6 +14,10 @@ if (process.env.NODE_ENV === "production") {
 module.exports = {
   siteName: "Mustardamus",
 
+  templates: {
+    Travel: "/travels/:city",
+  },
+
   css: {
     loaderOptions: {
       postcss: {
