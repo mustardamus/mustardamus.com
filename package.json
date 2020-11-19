@@ -5,9 +5,15 @@
   "license": "ISC",
   "version": "1.0.0",
   "scripts": {
-    "dev": "gridsome develop"
+    "dev": "gridsome develop",
+    "build": "gridsome build"
   },
   "dependencies": {
-    "gridsome": "^0.7.22"
+    "autoprefixer": "^9.8.6",
+    "gridsome": "^0.7.22",
+    "tailwindcss": "^2.0.1-compat"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^3.0.0"
   }
 }
