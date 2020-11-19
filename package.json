@@ -1,0 +1,13 @@
+{
+  "name": "mustardamus.com",
+  "author": "Sebastian Senf <contact@mustardamus.com>",
+  "description": "Personal Website Of Sebastian Senf",
+  "license": "ISC",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "gridsome develop"
+  },
+  "dependencies": {
+    "gridsome": "^0.7.22"
+  }
+}
