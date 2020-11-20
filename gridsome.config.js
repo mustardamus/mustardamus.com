@@ -13,6 +13,7 @@ if (process.env.NODE_ENV === "production") {
 
 module.exports = {
   siteName: "Mustardamus",
+  icon: "./src/assets/images/logo.png",
 
   templates: {
     Travel: "/travels/:city",

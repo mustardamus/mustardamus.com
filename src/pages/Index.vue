@@ -1,7 +1,7 @@
 <template>
-  <div>
-    Here will be dragons...
-  </div>
+  <layout>
+    <g-image src="~/assets/images/home.jpg" width="512" quality="90" />
+  </layout>
 </template>
 
 <script>
