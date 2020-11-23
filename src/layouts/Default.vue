@@ -2,7 +2,7 @@
   <div>
     <top-nav />
 
-    <div class="container mx-auto">
+    <div class="container mx-auto mt-36">
       <slot />
     </div>
   </div>
