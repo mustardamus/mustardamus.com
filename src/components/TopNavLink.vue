@@ -1,5 +1,5 @@
 <template>
-  <g-link :to="to">{{ title }}</g-link>
+  <g-link :to="to" class="block text-center p-3">{{ title }}</g-link>
 </template>
 
 <script>
