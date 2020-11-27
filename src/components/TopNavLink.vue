@@ -1,5 +1,7 @@
 <template>
-  <g-link :to="to" class="block text-center p-3">{{ title }}</g-link>
+  <g-link :to="to" class="block text-center p-3 sm:inline-block sm:p-2 sm:pr-3">
+    {{ title }}
+  </g-link>
 </template>
 
 <script>

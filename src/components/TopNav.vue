@@ -16,34 +16,33 @@
 
       <div class="text-right">
         <a
-          class="w-13 h-13 inline-block cursor-pointer mt-4 mr-4"
+          class="w-13 h-13 inline-block cursor-pointer mt-4 mr-4 sm:hidden"
           @click="onBurgerClick"
         >
           <icon-menu v-show="!isMenuActive" />
           <icon-minimize v-show="isMenuActive" />
         </a>
+
+        <top-nav-links class="hidden sm:inline-block" />
       </div>
     </div>
 
-    <div
+    <top-nav-links
       class="bg-blue-300 fixed top-14 block w-full"
       style="box-shadow: 0 10px 5px rgba(0, 0, 0, 0.7)"
       v-show="isMenuActive"
-    >
-      <top-nav-link to="/" title="About" />
-      <top-nav-link to="/posts" title="Posts" />
-      <top-nav-link to="/travels" title="Travels" />
-    </div>
+    />
   </nav>
 </template>
 
 <script>
 import IconMenu from "./icons/Menu.vue";
 import IconMinimize from "./icons/Minimize.vue";
+import TopNavLinks from "./TopNavLinks.vue";
 import TopNavLink from "./TopNavLink.vue";
 
 export default {
-  components: { IconMenu, IconMinimize, TopNavLink },
+  components: { IconMenu, IconMinimize, TopNavLinks },
 
   data() {
     return {
