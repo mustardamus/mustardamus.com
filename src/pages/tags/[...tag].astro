@@ -1,0 +1,29 @@
+---
+import { getTags } from "../../lib/tags"
+
+export async function getStaticPaths() {
+  const tags = await getTags()
+
+  return tags.map(({ name, posts }) => ({
+    params: { tag: name },
+    props: { posts },
+  }))
+}
+
+const { tag } = Astro.params
+const { posts } = Astro.props
+---
+
+<h1>#{tag}</h1>
+
+<ul>
+  {
+    posts.map((post) => (
+      <li>
+        <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+      </li>
+    ))
+  }
+</ul>
+
+<a href="/tags">All Tags</a>

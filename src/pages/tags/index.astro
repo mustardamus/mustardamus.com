@@ -1,0 +1,19 @@
+---
+import { getTags } from "../../lib/tags"
+
+const tags = await getTags()
+---
+
+<h1>Tags</h1>
+
+<ul>
+  {
+    tags.map((tag) => (
+      <li>
+        <a href={`/tags/${tag.name}`}>
+          #{tag.name} ({tag.posts.length})
+        </a>
+      </li>
+    ))
+  }
+</ul>
