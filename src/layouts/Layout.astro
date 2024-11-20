@@ -1,0 +1,26 @@
+---
+import "../assets/css/main.css"
+
+const { title } = Astro.props
+---
+
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>Mustardamus - {title}</title>
+
+    <style is:inline>
+      html {
+        visibility: hidden;
+        opacity: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <slot />
+  </body>
+</html>

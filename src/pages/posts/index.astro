@@ -1,18 +1,21 @@
 ---
 import { getCollection } from "astro:content"
+import Layout from "../../layouts/Layout.astro"
 
 const posts = await getCollection("posts")
 ---
 
-<ul>
-  {
-    posts.map((post) => (
-      <li>
-        <a href={`/posts/${post.slug}`}>{post.data.title}</a>
-        <time datetime={post.data.createdAt.toISOString()}>
-          {post.data.createdAt.toDateString()}
-        </time>
-      </li>
-    ))
-  }
-</ul>
+<Layout title="Posts">
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+          <time datetime={post.data.createdAt.toISOString()}>
+            {post.data.createdAt.toDateString()}
+          </time>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>

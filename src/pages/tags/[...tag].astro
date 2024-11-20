@@ -1,5 +1,6 @@
 ---
 import { getTags } from "../../lib/tags"
+import Layout from "../../layouts/Layout.astro"
 
 export async function getStaticPaths() {
   const tags = await getTags()
@@ -14,16 +15,18 @@ const { tag } = Astro.params
 const { posts } = Astro.props
 ---
 
-<h1>#{tag}</h1>
+<Layout title={`#${tag}`}>
+  <h1>#{tag}</h1>
 
-<ul>
-  {
-    posts.map((post) => (
-      <li>
-        <a href={`/posts/${post.slug}`}>{post.data.title}</a>
-      </li>
-    ))
-  }
-</ul>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+        </li>
+      ))
+    }
+  </ul>
 
-<a href="/tags">All Tags</a>
+  <a href="/tags">All Tags</a>
+</Layout>

@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* this will prevent the "unstyled flash", in the layout `html` is hidden */
+html {
+  visibility: visible;
+  opacity: 1;
+}

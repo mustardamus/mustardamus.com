@@ -1,6 +1,7 @@
 ---
 // @ts-nocheck
 import { getCollection } from "astro:content"
+import Layout from "../../layouts/Layout.astro"
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts")
@@ -15,16 +16,18 @@ const { post } = Astro.props
 const { Content } = await post.render()
 ---
 
-<h1>{post.data.title}</h1>
+<Layout title={post.data.title}>
+  <h1>{post.data.title}</h1>
 
-<ul>
-  {
-    post.data.tags.map((tag) => (
-      <li>
-        <a href={`/tags/${tag}`}>#{tag}</a>
-      </li>
-    ))
-  }
-</ul>
+  <ul>
+    {
+      post.data.tags.map((tag) => (
+        <li>
+          <a href={`/tags/${tag}`}>#{tag}</a>
+        </li>
+      ))
+    }
+  </ul>
 
-<Content />
+  <Content />
+</Layout>

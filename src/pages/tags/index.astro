@@ -1,19 +1,22 @@
 ---
 import { getTags } from "../../lib/tags"
+import Layout from "../../layouts/Layout.astro"
 
 const tags = await getTags()
 ---
 
-<h1>Tags</h1>
+<Layout title="Tags">
+  <h1>Tags</h1>
 
-<ul>
-  {
-    tags.map((tag) => (
-      <li>
-        <a href={`/tags/${tag.name}`}>
-          #{tag.name} ({tag.posts.length})
-        </a>
-      </li>
-    ))
-  }
-</ul>
+  <ul>
+    {
+      tags.map((tag) => (
+        <li>
+          <a href={`/tags/${tag.name}`}>
+            #{tag.name} ({tag.posts.length})
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
