@@ -1,101 +1,98 @@
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
-  <div
-    class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
-  >
-    <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-      <img
-        src="https://flowbite.com/docs/images/logo.svg"
-        class="h-8"
-        alt="Flowbite Logo"
-      />
-      <span
-        class="self-center text-l font-semibold whitespace-nowrap dark:text-white"
-      >
-        Mustardamus
-      </span>
-    </a>
-    <button
-      data-collapse-toggle="navbar-default"
-      type="button"
-      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-      aria-controls="navbar-default"
-      aria-expanded="false"
+---
+import { Icon } from "astro-icon/components"
+import ThemeController from "./ThemeController.astro"
+
+interface Link {
+  title: string
+  href: string
+  icon: string
+}
+
+interface Props {
+  links: Link[]
+}
+
+const { links = [] }: Props = Astro.props
+const { pathname } = Astro.url
+
+function isCurrentPage(href: string): boolean {
+  if (pathname === href || (href !== "/" && pathname.startsWith(href))) {
+    return true
+  }
+
+  return false
+}
+---
+
+<nav
+  class:list={[
+    "relative",
+    "bg-stone-100 text-stone-950 dark:bg-stone-900 dark:text-stone-50",
+  ]}
+>
+  <div class="max-w-screen-lg mx-auto flex items-center min-h-16 h-16">
+    <a
+      href="/"
+      class:list={[
+        "inline-block rounded-full p-1 ml-2",
+        "bg-stone-100 dark:bg-stone-900",
+        "translate-y-2 hover:translate-y-3 transition-all",
+      ]}
     >
-      <span class="sr-only">Open main menu</span>
-      <svg
-        class="w-5 h-5"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 17 14"
+      <img src="/public/logo.png" alt="Mustardamus" class="w-16" />
+    </a>
+
+    <div class="grow flex justify-end">
+      <div class="p-3.5">
+        <ThemeController />
+      </div>
+
+      <button id="nav-bar-burger" class="px-5 sm:hidden transition-all">
+        <Icon name="solar:hamburger-menu-line-duotone" size={24} />
+      </button>
+
+      <div
+        id="nav-bar-menu"
+        class:list={[
+          "bg-stone-100 dark:bg-stone-900",
+          "hidden absolute top-16 right-0 px-4 py-2 rounded-bl-md shadow-xl",
+          "sm:inline-block sm:relative sm:top-0 sm:p-0 sm:mr-1 sm:shadow-none",
+        ]}
       >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M1 1h15M1 7h15M1 13h15"></path>
-      </svg>
-    </button>
-    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-      <ul
-        class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
-      >
-        <li>
-          <a
-            href="/"
-            class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
-            aria-current="page"
-          >
-            Home
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-            >About</a
-          >
-        </li>
-        <li>
-          <a
-            href="#"
-            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-            >Travels</a
-          >
-        </li>
-        <li>
-          <a
-            href="#"
-            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-            >Posts</a
-          >
-        </li>
-        <li>
-          <a
-            href="#"
-            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-            >Contact</a
-          >
-        </li>
-      </ul>
+        <ul class="sm:flex">
+          {
+            links.map((link: Link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class:list={[
+                    "flex px-12 py-2 m-2 rounded transition-all",
+                    "bg-stone-200 dark:bg-stone-800",
+                    "hover:bg-stone-300 dark:hover:bg-stone-950",
+                    "sm:px-4 sm:hover:translate-y-1",
+                    isCurrentPage(link.href) && [
+                      "bg-stone-200 dark:bg-stone-950",
+                    ],
+                  ]}
+                >
+                  <Icon name={link.icon} size={22} />
+                  <span class="px-1">{link.title}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </div>
 </nav>
 
 <script>
-  const burgerEl = document.querySelector("button[data-collapse-toggle]")
-  const collapseToggleId = burgerEl?.getAttribute("data-collapse-toggle") || ""
-  const collapseToggleEl = document.getElementById(collapseToggleId)
-  const hiddenClass = "hidden"
+  const burgerEl = document.getElementById("nav-bar-burger")
+  const menuEl = document.getElementById("nav-bar-menu")
 
-  burgerEl?.addEventListener("click", (e) => {
-    const classList = collapseToggleEl?.classList
-
-    if (classList?.contains(hiddenClass)) {
-      classList?.remove(hiddenClass)
-    } else {
-      classList?.add(hiddenClass)
-    }
+  burgerEl?.addEventListener("click", () => {
+    burgerEl?.classList.toggle("rotate-90")
+    menuEl?.classList.toggle("hidden")
   })
 </script>
