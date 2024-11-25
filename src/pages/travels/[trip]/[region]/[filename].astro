@@ -1,0 +1,36 @@
+---
+import { getPictures, getTripRegionPictures } from "../../../../lib/travels"
+import Layout from "../../../../layouts/Layout.astro"
+import { Image } from "astro:assets"
+
+export async function getStaticPaths() {
+  return getPictures().map(({ trip, region, filename }) => {
+    return { params: { trip, region, filename } }
+  })
+}
+
+const { trip, region, filename } = Astro.params
+const picturesAll = getTripRegionPictures(trip, region)
+const picture = picturesAll.filter((picture) => picture.filename === filename)
+const pictures = picturesAll.filter((picture) => picture.filename !== filename)
+
+// Note: not using import() directly here, because it would fail when building
+//       so use import.meta.glob, which resolves the correct path
+---
+
+<Layout title={filename}>
+  <Image src={picture[0].import()} alt={filename} width="600" />
+  <ul class="flex flex-wrap justify-evenly">
+    {
+      pictures.map((picture) => (
+        <li class="">
+          <a
+            href={`/travels/${picture.trip}/${picture.region}/${picture.filename}`}
+          >
+            <Image src={picture.import()} alt={picture.filename} width="200" />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>

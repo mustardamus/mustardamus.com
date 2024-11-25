@@ -19,6 +19,7 @@ export default defineConfig({
           "hamburger-menu-line-duotone",
           "sun-2-line-duotone",
           "moon-bold-duotone",
+          "earth-bold-duotone",
         ],
       },
     }),

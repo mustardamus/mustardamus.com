@@ -6,10 +6,11 @@ const { title } = Astro.props
 const navBarLinks = [
   { title: "Home", href: "/", icon: "solar:home-bold-duotone" },
   { title: "Posts", href: "/posts", icon: "solar:book-2-bold-duotone" },
+  { title: "Travels", href: "/travels", icon: "solar:earth-bold-duotone" },
 ]
 ---
 
-<html lang="en" class="darkx">
+<html lang="en" class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -25,7 +26,7 @@ const navBarLinks = [
     </style>
   </head>
 
-  <body>
+  <body class="bg-white dark:bg-stone-950">
     <NavBar links={navBarLinks} />
     <slot />
   </body>

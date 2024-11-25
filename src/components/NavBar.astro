@@ -42,8 +42,8 @@ function isCurrentPage(href: string): boolean {
       <img src="/public/logo.png" alt="Mustardamus" class="w-16" />
     </a>
 
-    <div class="grow flex justify-end">
-      <div class="p-3.5">
+    <div class="grow flex justify-end items-center">
+      <div class="mr-0 sm:mr-2">
         <ThemeController />
       </div>
 
@@ -71,7 +71,7 @@ function isCurrentPage(href: string): boolean {
                     "hover:bg-stone-300 dark:hover:bg-stone-950",
                     "sm:px-4 sm:hover:translate-y-1",
                     isCurrentPage(link.href) && [
-                      "bg-stone-200 dark:bg-stone-950",
+                      "bg-stone-300 dark:bg-stone-950",
                     ],
                   ]}
                 >

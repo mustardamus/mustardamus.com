@@ -2,4 +2,49 @@
 import { Icon } from "astro-icon/components"
 ---
 
-<Icon name="solar:sun-2-line-duotone" size={26} />
+<button id="theme-controller" class="relative block w-7 h-7 group">
+  <div
+    class:list={[
+      "absolute top-0 left-0 transition-all",
+      "opacity-0 rotate-45",
+      "group-[.is-dark]:opacity-100 group-[.is-dark]:rotate-0",
+    ]}
+  >
+    <Icon name="solar:sun-2-line-duotone" size={26} />
+  </div>
+
+  <div
+    class:list={[
+      "absolute top-0 left-0 transition-all",
+      "opacity-100 rotate-0",
+      "group-[.is-dark]:opacity-0 group-[.is-dark]:-rotate-45",
+    ]}
+  >
+    <Icon name="solar:moon-bold-duotone" size={24} />
+  </div>
+</button>
+
+<script>
+  function prefersDarkTheme(): boolean {
+    return (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    )
+  }
+
+  const htmlEl = document.documentElement
+  const themeControllerEl = document.getElementById("theme-controller")
+
+  themeControllerEl?.addEventListener("click", () => {
+    themeControllerEl.classList.toggle("is-dark")
+    htmlEl.classList.toggle("dark")
+  })
+
+  if (prefersDarkTheme()) {
+    htmlEl.classList.add("dark")
+    themeControllerEl?.classList.add("is-dark")
+  } else {
+    htmlEl.classList.remove("dark")
+    themeControllerEl?.classList.remove("is-dark")
+  }
+</script>
