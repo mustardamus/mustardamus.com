@@ -48,3 +48,25 @@ export function getTripRegions(trip: string): Region[] {
 export function getTripRegionPictures(trip: string, region: string): Picture[] {
   return getTripPictures(trip).filter((picture) => picture.region === region)
 }
+
+export function getTripPrevNextPictures(trip: string, filename: string) {
+  const pictures = getTripPictures(trip)
+  const currentIndex = pictures.findIndex(
+    (picture) => picture.filename === filename,
+  )
+  let prev, next
+
+  if (currentIndex === 0) {
+    prev = pictures[pictures.length - 1]
+  } else {
+    prev = pictures[currentIndex - 1]
+  }
+
+  if (currentIndex + 1 === pictures.length) {
+    next = pictures[0]
+  } else {
+    next = pictures[currentIndex + 1]
+  }
+
+  return { prev, next }
+}

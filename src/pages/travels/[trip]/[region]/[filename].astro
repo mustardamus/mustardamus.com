@@ -1,5 +1,9 @@
 ---
-import { getPictures, getTripRegionPictures } from "../../../../lib/travels"
+import {
+  getPictures,
+  getTripRegionPictures,
+  getTripPrevNextPictures,
+} from "../../../../lib/travels"
 import Layout from "../../../../layouts/Layout.astro"
 import { Image } from "astro:assets"
 
@@ -10,9 +14,9 @@ export async function getStaticPaths() {
 }
 
 const { trip, region, filename } = Astro.params
-const picturesAll = getTripRegionPictures(trip, region)
-const picture = picturesAll.filter((picture) => picture.filename === filename)
-const pictures = picturesAll.filter((picture) => picture.filename !== filename)
+const pictures = getTripRegionPictures(trip, region)
+const picture = pictures.filter((picture) => picture.filename === filename)
+const { prev, next } = getTripPrevNextPictures(trip, filename)
 
 // Note: not using import() directly here, because it would fail when building
 //       so use import.meta.glob, which resolves the correct path
@@ -20,6 +24,15 @@ const pictures = picturesAll.filter((picture) => picture.filename !== filename)
 
 <Layout title={filename}>
   <Image src={picture[0].import()} alt={filename} width="600" />
+
+  <a href={`/travels/${prev.trip}/${prev.region}/${prev.filename}`}>
+    <Image src={prev.import()} alt="" width="100" />
+  </a>
+
+  <a href={`/travels/${next.trip}/${next.region}/${next.filename}`}>
+    <Image src={next.import()} alt="" width="100" />
+  </a>
+
   <ul class="flex flex-wrap justify-evenly">
     {
       pictures.map((picture) => (
