@@ -20,6 +20,8 @@ export default defineConfig({
           "sun-2-line-duotone",
           "moon-bold-duotone",
           "earth-bold-duotone",
+          "round-arrow-left-bold",
+          "round-arrow-right-bold",
         ],
       },
     }),

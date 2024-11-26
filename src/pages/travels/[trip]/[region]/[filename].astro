@@ -3,9 +3,10 @@ import {
   getPictures,
   getTripRegionPictures,
   getTripPrevNextPictures,
-} from "../../../../lib/travels"
-import Layout from "../../../../layouts/Layout.astro"
+} from "@src/lib/travels"
+import Layout from "@src/layouts/Layout.astro"
 import { Image } from "astro:assets"
+import { Icon } from "astro-icon/components"
 
 export async function getStaticPaths() {
   return getPictures().map(({ trip, region, filename }) => {
@@ -23,15 +24,56 @@ const { prev, next } = getTripPrevNextPictures(trip, filename)
 ---
 
 <Layout title={filename}>
-  <Image src={picture[0].import()} alt={filename} width="600" />
+  <div class="flex justify-center py-1">
+    <div
+      class="inline-flex items-center justify-between flex-wrap lg:flex-nowrap"
+    >
+      <div class="bg-gray-200 border-4 rounded mx-8 my-4 lg:mx-4 shadow-xl">
+        <Image
+          src={picture[0].import()}
+          alt={filename}
+          width="1024"
+          class="rounded"
+        />
+      </div>
 
-  <a href={`/travels/${prev.trip}/${prev.region}/${prev.filename}`}>
-    <Image src={prev.import()} alt="" width="100" />
-  </a>
+      <a
+        class="flex items-center group lg:-order-1"
+        href={`/travels/${prev.trip}/${prev.region}/${prev.filename}`}
+      >
+        <span
+          class:list={[
+            "bg-gray-200 text-gray-500 translate-x-5 rounded-full",
+            "group-hover:translate-x-4 group-hover:text-gray-950 transition-all",
+          ]}
+        >
+          <Icon name="solar:round-arrow-left-bold" size={32} />
+        </span>
 
-  <a href={`/travels/${next.trip}/${next.region}/${next.filename}`}>
-    <Image src={next.import()} alt="" width="100" />
-  </a>
+        <div class="rounded border-4 border-gray-200">
+          <Image src={prev.import()} alt="" width="200" class="rounded" />
+        </div>
+      </a>
+
+      <a
+        class="flex items-center group"
+        href={`/travels/${next.trip}/${next.region}/${next.filename}`}
+      >
+        <div class="rounded border-4 border-gray-200">
+          <Image src={next.import()} alt="" width="200" />
+        </div>
+
+        <span
+          class:list={[
+            "bg-gray-200 text-gray-500 -translate-x-5 rounded-full",
+            "group-hover:-translate-x-4 group-hover:text-gray-950 transition-all",
+          ]}
+        >
+          <Icon name="solar:round-arrow-right-bold" size={32} />
+        </span>
+      </a>
+    </div>
+  </div>
 
   <ul class="flex flex-wrap justify-evenly">
     {
