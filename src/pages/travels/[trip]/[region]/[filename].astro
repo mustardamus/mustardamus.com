@@ -1,12 +1,12 @@
 ---
+import { Image } from "astro:assets"
+import { Icon } from "astro-icon/components"
 import {
   getPictures,
   getTripRegionPictures,
   getTripPrevNextPictures,
 } from "@src/lib/travels"
 import Layout from "@src/layouts/Layout.astro"
-import { Image } from "astro:assets"
-import { Icon } from "astro-icon/components"
 
 export async function getStaticPaths() {
   return getPictures().map(({ trip, region, filename }) => {
@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 
 const { trip, region, filename } = Astro.params
 const pictures = getTripRegionPictures(trip, region)
-const picture = pictures.filter((picture) => picture.filename === filename)
+const picture = pictures.filter((picture) => picture.filename === filename)[0]
 const { prev, next } = getTripPrevNextPictures(trip, filename)
 
 // Note: not using import() directly here, because it would fail when building
@@ -24,49 +24,66 @@ const { prev, next } = getTripPrevNextPictures(trip, filename)
 ---
 
 <Layout title={filename}>
-  <div class="flex justify-center py-1">
-    <div
-      class="inline-flex items-center justify-between flex-wrap lg:flex-nowrap"
-    >
-      <div class="bg-gray-200 border-4 rounded mx-8 my-4 lg:mx-4 shadow-xl">
-        <Image
-          src={picture[0].import()}
-          alt={filename}
-          width="1024"
-          class="rounded"
-        />
-      </div>
+  <div
+    class="inline-flex items-center justify-between flex-wrap lg:flex-nowrap overflow-hidden"
+  >
+    <div class="bg-gray-200 border-4 rounded m-4 shadow-xl">
+      <Image
+        src={picture.import()}
+        alt={filename}
+        widths={[360, 720, 1024, 1280]}
+        sizes={`
+            (max-width: 360px) 360px,
+            (max-width: 720px) 720px,
+            (max-width: 1024px) 1024px,
+            1280px`}
+        class="rounded"
+      />
+    </div>
 
+    <div class="max-w-[50%] lg:-order-1 lg:max-w-auto lg:min-w-[232px]">
       <a
-        class="flex items-center group lg:-order-1"
+        class="flex items-center group -translate-x-4 lg:-translate-x-0"
         href={`/travels/${prev.trip}/${prev.region}/${prev.filename}`}
       >
         <span
           class:list={[
-            "bg-gray-200 text-gray-500 translate-x-5 rounded-full",
-            "group-hover:translate-x-4 group-hover:text-gray-950 transition-all",
+            "bg-gray-200 text-gray-500 translate-x-5 rounded-full transition-all",
+            "group-hover:translate-x-4 group-hover:text-orange-950 group-hover:bg-orange-500",
           ]}
         >
           <Icon name="solar:round-arrow-left-bold" size={32} />
         </span>
 
-        <div class="rounded border-4 border-gray-200">
+        <div
+          class:list={[
+            "rounded border-4 bg-gray-200 border-gray-200 transition-all",
+            "group-hover:bg-orange-500 group-hover:border-orange-500",
+          ]}
+        >
           <Image src={prev.import()} alt="" width="200" class="rounded" />
         </div>
       </a>
+    </div>
 
+    <div class="max-w-[50%] lg:max-w-auto lg:min-w-[232px]">
       <a
-        class="flex items-center group"
+        class="flex items-center group translate-x-4 lg:translate-x-0"
         href={`/travels/${next.trip}/${next.region}/${next.filename}`}
       >
-        <div class="rounded border-4 border-gray-200">
+        <div
+          class:list={[
+            "rounded border-4 bg-gray-200 border-gray-200 transition-all",
+            "group-hover:bg-orange-500 group-hover:border-orange-500",
+          ]}
+        >
           <Image src={next.import()} alt="" width="200" />
         </div>
 
         <span
           class:list={[
-            "bg-gray-200 text-gray-500 -translate-x-5 rounded-full",
-            "group-hover:-translate-x-4 group-hover:text-gray-950 transition-all",
+            "bg-gray-200 text-gray-500 -translate-x-5 rounded-full transition-all",
+            "group-hover:-translate-x-4 group-hover:text-orange-950 group-hover:bg-orange-500",
           ]}
         >
           <Icon name="solar:round-arrow-right-bold" size={32} />
