@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets"
+import { Icon } from "astro-icon/components"
+
+const { picture, isNext = false } = Astro.props
+---
+
+<a
+  class:list={[
+    "flex items-center group",
+    `${isNext ? "" : "-"}translate-x-4`,
+    "lg:translate-x-0",
+  ]}
+  href={`/travels/${picture.trip}/${picture.region}/${picture.filename}`}
+>
+  <span
+    class:list={[
+      "rounded-full transition-all",
+      "bg-stone-200 text-stone-500",
+      "dark:bg-stone-900 dark:text-stone-400",
+      "group-hover:text-orange-950 group-hover:bg-orange-500",
+      `${isNext ? "-" : ""}translate-x-5`,
+      `group-hover:${isNext ? "-" : ""}translate-x-4`,
+      `${isNext ? "order-1" : ""}`,
+    ]}
+  >
+    <Icon
+      name={`solar:round-arrow-${isNext ? "right" : "left"}-bold`}
+      size={32}
+    />
+  </span>
+
+  <div
+    class:list={[
+      "rounded border-4 transition-all",
+      "bg-stone-200 border-stone-200",
+      "dark:bg-stone-900 dark:border-stone-900",
+      "group-hover:bg-orange-500 group-hover:border-orange-500",
+    ]}
+  >
+    <Image src={picture.import()} alt="" width="200" class="rounded" />
+  </div>
+</a>

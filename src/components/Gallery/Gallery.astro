@@ -1,0 +1,39 @@
+---
+import { Image } from "astro:assets"
+import PrevNextLink from "./PrevNextLink.astro"
+
+const { currentPicture, relatedPictures, prevPicture, nextPicture } =
+  Astro.props
+---
+
+<div
+  class="inline-flex items-center justify-between flex-wrap lg:flex-nowrap overflow-hidden"
+>
+  <div
+    class:list={[
+      "border-4 rounded m-4 shadow-xl",
+      "bg-stone-200 border-stone-200",
+      "dark:bg-stone-900 dark:border-stone-900",
+    ]}
+  >
+    <Image
+      src={currentPicture.import()}
+      alt=""
+      widths={[360, 720, 1024, 1280]}
+      sizes={`
+            (max-width: 360px) 360px,
+            (max-width: 720px) 720px,
+            (max-width: 1024px) 1024px,
+            1280px`}
+      class="rounded"
+    />
+  </div>
+
+  <div class="max-w-[50%] lg:-order-1 lg:max-w-auto lg:min-w-[232px]">
+    <PrevNextLink picture={prevPicture} />
+  </div>
+
+  <div class="max-w-[50%] lg:max-w-auto lg:min-w-[232px]">
+    <PrevNextLink picture={nextPicture} isNext={true} />
+  </div>
+</div>

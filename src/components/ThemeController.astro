@@ -34,13 +34,20 @@ import { Icon } from "astro-icon/components"
 
   const htmlEl = document.documentElement
   const themeControllerEl = document.getElementById("theme-controller")
+  const currentTheme = localStorage.getItem("theme")
 
   themeControllerEl?.addEventListener("click", () => {
     themeControllerEl.classList.toggle("is-dark")
     htmlEl.classList.toggle("dark")
+
+    if (htmlEl.classList.contains("dark")) {
+      localStorage.setItem("theme", "dark")
+    } else {
+      localStorage.removeItem("theme")
+    }
   })
 
-  if (prefersDarkTheme()) {
+  if (currentTheme === "dark" || prefersDarkTheme()) {
     htmlEl.classList.add("dark")
     themeControllerEl?.classList.add("is-dark")
   } else {
