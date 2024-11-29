@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets"
 import {
   getPictures,
   getTripRegionPictures,
@@ -7,6 +6,7 @@ import {
 } from "@src/lib/travels"
 import Layout from "@src/layouts/Layout.astro"
 import GalleryShow from "@src/components/Gallery/Show.astro"
+import GalleryIndex from "@src/components/Gallery/Index.astro"
 
 export async function getStaticPaths() {
   return getPictures().map(({ trip, region, filename }) => {
@@ -28,17 +28,7 @@ const { prev, next } = getTripPrevNextPictures(trip, filename)
 <Layout title={filename}>
   <GalleryShow {currentPicture} prevPicture={prev} nextPicture={next} />
 
-  <ul class="flex flex-wrap justify-evenly">
-    {
-      pictures.map((picture) => (
-        <li class="">
-          <a
-            href={`/travels/${picture.trip}/${picture.region}/${picture.filename}`}
-          >
-            <Image src={picture.import()} alt={picture.filename} width="200" />
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+  <div class="mt-12">
+    <GalleryIndex {pictures} />
+  </div>
 </Layout>

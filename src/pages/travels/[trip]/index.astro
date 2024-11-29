@@ -1,7 +1,7 @@
 ---
-import { getTripRegions } from "../../../lib/travels"
-import Layout from "../../../layouts/Layout.astro"
-import { Image } from "astro:assets"
+import { getTripRegions } from "@src/lib/travels"
+import Layout from "@src/layouts/Layout.astro"
+import GalleryIndex from "@src/components/Gallery/Index.astro"
 
 export async function getStaticPaths() {
   return [
@@ -21,21 +21,7 @@ const regions = getTripRegions(trip)
     regions.map((region) => (
       <div class="">
         <h2 class="text-2xl">{region.name}</h2>
-        <ul class="flex flex-wrap justify-evenly">
-          {region.pictures.map((picture) => (
-            <li class="">
-              <a
-                href={`/travels/${picture.trip}/${picture.region}/${picture.filename}`}
-              >
-                <Image
-                  src={picture.import()}
-                  alt={picture.filename}
-                  width="300"
-                />
-              </a>
-            </li>
-          ))}
-        </ul>
+        <GalleryIndex pictures={region.pictures} />
       </div>
     ))
   }

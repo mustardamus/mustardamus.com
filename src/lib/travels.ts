@@ -1,15 +1,3 @@
-interface Picture {
-  trip: string
-  region: string
-  filename: string
-  import: () => Promise<{ default: ImageMetadata }>
-}
-
-interface Region {
-  name: string
-  pictures: Picture[]
-}
-
 export function getPictures(): Picture[] {
   // Can't use string literals for `import.meta.glob`,
   // so receive all images and filter by path

@@ -1,0 +1,19 @@
+---
+import { Image } from "astro:assets"
+
+const { pictures } = Astro.props
+---
+
+<ul class="flex flex-wrap justify-evenly">
+  {
+    pictures.map((picture: Picture) => (
+      <li class="">
+        <a
+          href={`/travels/${picture.trip}/${picture.region}/${picture.filename}`}
+        >
+          <Image src={picture.import()} alt={picture.filename} width="200" />
+        </a>
+      </li>
+    ))
+  }
+</ul>
