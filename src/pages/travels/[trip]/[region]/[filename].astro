@@ -6,7 +6,7 @@ import {
   getTripPrevNextPictures,
 } from "@src/lib/travels"
 import Layout from "@src/layouts/Layout.astro"
-import Gallery from "@src/components/Gallery/Gallery.astro"
+import GalleryShow from "@src/components/Gallery/Show.astro"
 
 export async function getStaticPaths() {
   return getPictures().map(({ trip, region, filename }) => {
@@ -26,7 +26,7 @@ const { prev, next } = getTripPrevNextPictures(trip, filename)
 ---
 
 <Layout title={filename}>
-  <Gallery {currentPicture} prevPicture={prev} nextPicture={next} />
+  <GalleryShow {currentPicture} prevPicture={prev} nextPicture={next} />
 
   <ul class="flex flex-wrap justify-evenly">
     {
