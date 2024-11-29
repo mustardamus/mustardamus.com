@@ -7,9 +7,8 @@ const { picture, isNext = false } = Astro.props
 
 <a
   class:list={[
-    "flex items-center group",
-    `${isNext ? "" : "-"}translate-x-4`,
-    "lg:translate-x-0",
+    "flex items-center group lg:translate-x-0",
+    isNext ? "translate-x-4" : "-translate-x-4",
   ]}
   href={`/travels/${picture.trip}/${picture.region}/${picture.filename}`}
 >
@@ -19,9 +18,9 @@ const { picture, isNext = false } = Astro.props
       "bg-stone-200 text-stone-500",
       "dark:bg-stone-900 dark:text-stone-400",
       "group-hover:text-orange-950 group-hover:bg-orange-500",
-      `${isNext ? "-" : ""}translate-x-5`,
-      `group-hover:${isNext ? "-" : ""}translate-x-4`,
-      `${isNext ? "order-1" : ""}`,
+      isNext
+        ? "order-1 -translate-x-5 group-hover:-translate-x-4"
+        : "translate-x-5 group-hover:translate-x-4",
     ]}
   >
     <Icon
@@ -30,7 +29,7 @@ const { picture, isNext = false } = Astro.props
     />
   </span>
 
-  <div
+  <span
     class:list={[
       "rounded border-4 transition-all",
       "bg-stone-200 border-stone-200",
@@ -39,5 +38,5 @@ const { picture, isNext = false } = Astro.props
     ]}
   >
     <Image src={picture.import()} alt="" width="200" class="rounded" />
-  </div>
+  </span>
 </a>
