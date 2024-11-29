@@ -24,8 +24,8 @@ import { Icon } from "astro-icon/components"
   </div>
 </button>
 
-<script>
-  function prefersDarkTheme(): boolean {
+<script is:inline>
+  function prefersDarkTheme() {
     return (
       window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches

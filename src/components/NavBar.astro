@@ -1,6 +1,8 @@
 ---
+import { Image } from "astro:assets"
 import { Icon } from "astro-icon/components"
 import ThemeController from "./ThemeController.astro"
+import Logo from "@src/assets/images/logo.png"
 
 interface Link {
   title: string
@@ -39,7 +41,7 @@ function isCurrentPage(href: string): boolean {
         "translate-y-2 hover:translate-y-3 transition-all",
       ]}
     >
-      <img src="/public/logo.png" alt="Mustardamus" class="w-16" />
+      <Image src={Logo} alt="" width={64} quality={100} />
     </a>
 
     <div class="grow flex justify-end items-center">
@@ -67,12 +69,11 @@ function isCurrentPage(href: string): boolean {
                   href={link.href}
                   class:list={[
                     "flex px-12 py-2 m-2 rounded transition-all",
-                    "bg-stone-200 dark:bg-stone-800",
                     "hover:bg-orange-500 dark:hover:bg-orange-500 dark:hover:text-stone-950",
                     "sm:px-4 sm:hover:translate-y-1",
-                    isCurrentPage(link.href) && [
-                      "bg-orange-500 dark:bg-orange-500 dark:text-stone-950",
-                    ],
+                    isCurrentPage(link.href)
+                      ? "bg-orange-500 dark:bg-orange-500 dark:text-stone-950"
+                      : "bg-stone-200 dark:bg-stone-800",
                   ]}
                 >
                   <Icon name={link.icon} size={22} />
