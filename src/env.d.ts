@@ -9,5 +9,6 @@ interface Picture {
 
 interface Region {
   name: string
+  title: string
   pictures: Picture[]
 }

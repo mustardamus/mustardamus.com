@@ -1,5 +1,5 @@
 ---
-import { getTripRegions } from "@src/lib/travels"
+import { getTripRegions, getCountryCityFromRegion } from "@src/lib/travels"
 import Layout from "@src/layouts/Layout.astro"
 import GalleryIndex from "@src/components/Gallery/Index.astro"
 
@@ -19,9 +19,8 @@ const regions = getTripRegions(trip)
 <Layout title="Home">
   {
     regions.map((region) => (
-      <div class="">
-        <h2 class="text-2xl">{region.name}</h2>
-        <GalleryIndex pictures={region.pictures} />
+      <div class="py-7">
+        <GalleryIndex pictures={region.pictures} title={region.title} />
       </div>
     ))
   }

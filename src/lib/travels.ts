@@ -22,6 +22,24 @@ export function getTripPictures(trip: string): Picture[] {
   return getPictures().filter((picture) => picture.trip === trip)
 }
 
+function capitalize(str: string): string {
+  return `${str.charAt(0).toUpperCase()}${str.slice(1)}`
+}
+
+export function getRegionTitle(region: string): string {
+  let title = capitalize(region)
+  const parts = region.split("-")
+
+  if (parts.length) {
+    // it's formated as country-city (digital-nomad trip)
+    const city = capitalize(`${parts.pop()}`)
+    const country = parts.map((part) => capitalize(part)).join(" ")
+    title = `${city} (${country})`
+  }
+
+  return title
+}
+
 export function getTripRegions(trip: string): Region[] {
   const pictures = getTripPictures(trip)
   const regionsAll = pictures.map((picture) => picture.region)
@@ -29,6 +47,7 @@ export function getTripRegions(trip: string): Region[] {
 
   return regionsUnique.map((region) => ({
     name: region,
+    title: getRegionTitle(region),
     pictures: pictures.filter((picture) => picture.region === region),
   }))
 }

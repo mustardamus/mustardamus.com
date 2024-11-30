@@ -1,8 +1,12 @@
 ---
 import { Image } from "astro:assets"
 
-const { pictures } = Astro.props
+const { pictures, title } = Astro.props
 ---
+
+<h2 class="text-3xl text-stone-950 dark:text-stone-50 px-4 pb-3 lg:px-8">
+  {title}
+</h2>
 
 <ul class="flex flex-wrap justify-between px-4 lg:px-8">
   {

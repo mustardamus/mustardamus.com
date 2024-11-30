@@ -3,6 +3,7 @@ import {
   getPictures,
   getTripRegionPictures,
   getTripPrevNextPictures,
+  getRegionTitle,
 } from "@src/lib/travels"
 import Layout from "@src/layouts/Layout.astro"
 import GalleryShow from "@src/components/Gallery/Show.astro"
@@ -15,6 +16,7 @@ export async function getStaticPaths() {
 }
 
 const { trip, region, filename } = Astro.params
+const title = "More from " + getRegionTitle(region)
 const pictures = getTripRegionPictures(trip, region)
 const currentPicture = pictures.filter(
   (picture) => picture.filename === filename,
@@ -29,6 +31,6 @@ const { prev, next } = getTripPrevNextPictures(trip, filename)
   <GalleryShow {currentPicture} prevPicture={prev} nextPicture={next} />
 
   <div class="mt-12">
-    <GalleryIndex {pictures} />
+    <GalleryIndex {pictures} {title} />
   </div>
 </Layout>
