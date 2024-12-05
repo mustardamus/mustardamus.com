@@ -34,6 +34,6 @@ if (isDev) {
   app.use("*", serveStatic({ root: staticGenDir }));
 }
 
-if (import.meta.main) {
-  Deno.serve(app.fetch);
-}
+// if (import.meta.main) {
+Deno.serve(app.fetch);
+// }
