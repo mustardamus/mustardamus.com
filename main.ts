@@ -2,11 +2,11 @@ import { Hono } from "hono";
 import { toSSG, serveStatic } from "hono/deno";
 import { join } from "@std/path";
 import compileCss from "./src/lib/postcss.ts";
-import Layout from "./src/layouts/Layout.tsx";
+// import Layout from "./src/layouts/Layout.tsx";
 
 function setupRoutes(app: Hono) {
   app.get("/", (c) => {
-    return c.html(<Layout />);
+    return c.html("<Layout />");
   });
 
   app.get("/css/main.css", async (c) => {
