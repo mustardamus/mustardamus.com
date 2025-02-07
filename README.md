@@ -11,3 +11,17 @@
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 | `npm run deploy`          | Build site and deploy to GitHub Pages            |
+
+## Deployment on GitHub Pages
+
+- [gh-pages](https://www.npmjs.com/package/gh-pages)
+- [DNS Settings](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)
+
+  ```
+    $ dig mustardamus.com +noall +answer -t A
+
+    mustardamus.com.	1553	IN	A	185.199.110.153
+    mustardamus.com.	1553	IN	A	185.199.111.153
+    mustardamus.com.	1553	IN	A	185.199.109.153
+    mustardamus.com.	1553	IN	A	185.199.108.153
+  ```

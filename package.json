@@ -8,7 +8,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "predeploy": "astro build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist --cname mustardamus.com"
   },
   "dependencies": {
     "astro": "^5.2.5"
