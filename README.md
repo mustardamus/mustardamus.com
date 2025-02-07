@@ -16,6 +16,7 @@
 
 - [gh-pages](https://www.npmjs.com/package/gh-pages)
 - [DNS Settings](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)
+- [GitHub Pages https/www Redirect](https://stackoverflow.com/a/58672792)
 
   ```
     $ dig mustardamus.com +noall +answer -t A
