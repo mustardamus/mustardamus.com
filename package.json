@@ -6,16 +6,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "predeploy": "astro build",
-    "deploy": "gh-pages -d dist --cname mustardamus.com"
+    "astro": "astro"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.4",
     "astro": "^5.2.5",
     "tailwindcss": "^4.0.4"
-  },
-  "devDependencies": {
-    "gh-pages": "^6.3.0"
   }
 }

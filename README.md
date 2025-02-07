@@ -10,11 +10,10 @@
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
-| `npm run deploy`          | Build site and deploy to GitHub Pages            |
 
 ## Deployment on GitHub Pages
 
-- [gh-pages](https://www.npmjs.com/package/gh-pages)
+- [Deploy your Astro Site to GitHub Pages](https://docs.astro.build/en/guides/deploy/github/)
 - [DNS Settings](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)
 - [GitHub Pages https/www Redirect](https://stackoverflow.com/a/58672792)
 
