@@ -25,3 +25,8 @@
     mustardamus.com.	1553	IN	A	185.199.109.153
     mustardamus.com.	1553	IN	A	185.199.108.153
   ```
+
+## Icons
+
+- [Solar Icon Set](https://icon-sets.iconify.design/solar/)
+- [Astro Icon](https://www.astroicon.dev/guides/components/)
