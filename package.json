@@ -11,7 +11,9 @@
     "deploy": "gh-pages -d dist --cname mustardamus.com"
   },
   "dependencies": {
-    "astro": "^5.2.5"
+    "@tailwindcss/vite": "^4.0.4",
+    "astro": "^5.2.5",
+    "tailwindcss": "^4.0.4"
   },
   "devDependencies": {
     "gh-pages": "^6.3.0"
