@@ -1,0 +1,62 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<div id="dark-mode-switch" class="group relative w-8 h-8 cursor-pointer">
+  <span
+    class:list={[
+      "absolute inset-0 transition-all",
+      "opacity-0 group-[.dark]:opacity-100",
+      "rotate-0 group-[.dark]:rotate-90",
+      "text-orange-400",
+    ]}
+  >
+    <Icon name="solar:sun-2-bold-duotone" class="w-full h-full" />
+  </span>
+  <span
+    class:list={[
+      "absolute inset-0 transition-all",
+      "opacity-100 group-[.dark]:opacity-0",
+      "rotate-0 group-[.dark]:rotate-90",
+      "text-stone-900",
+    ]}
+  >
+    <Icon name="solar:moon-bold-duotone" class="w-full h-full" />
+  </span>
+</div>
+
+<script is:inline>
+  const SWITCH_ID = "dark-mode-switch";
+  const DARK_CLASS = "dark";
+
+  function toggleDarkClass(el, enabled) {
+    if (enabled) {
+      el.classList.add(DARK_CLASS);
+    } else {
+      el.classList.remove(DARK_CLASS);
+    }
+  }
+
+  function setDarkMode(enabled) {
+    toggleDarkClass(document.body, enabled);
+    toggleDarkClass(switchEl, enabled);
+    localStorage.setItem(SWITCH_ID, enabled);
+  }
+
+  const switchEl = document.getElementById(SWITCH_ID);
+  const currentMode = localStorage.getItem(SWITCH_ID);
+  let isDark = false;
+
+  if (currentMode) {
+    isDark = currentMode === "true";
+  } else {
+    isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+
+  setDarkMode(isDark);
+
+  switchEl.addEventListener("click", () => {
+    isDark = document.body.classList.contains(DARK_CLASS);
+    setDarkMode(!isDark);
+  });
+</script>

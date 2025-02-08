@@ -1,5 +1,6 @@
 ---
 import "../assets/css/global.css";
+import NavBar from "../components/NavBar.astro";
 ---
 
 <!doctype html>
@@ -13,7 +14,8 @@ import "../assets/css/global.css";
     <title>Astro Basics</title>
   </head>
 
-  <body>
+  <body class="bg-stone-50 dark:bg-stone-950 transition-all">
+    <NavBar />
     <slot />
   </body>
 </html>
