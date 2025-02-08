@@ -1,5 +1,73 @@
 ---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 import DarkModeSwitch from "./DarkModeSwitch.astro";
+import logoImage from "../assets/images/logo.png";
+
+interface Props {
+  links: Link[];
+}
+
+const { links = [] } = Astro.props as Props;
 ---
 
-<DarkModeSwitch />
+<nav class:list={["container mx-auto select-none"]}>
+  <div
+    class:list={[
+      "flex items-center",
+      "sm:mt-4 sm:mx-1 sm:rounded-sm",
+      "bg-light-secondary dark:bg-dark-secondary",
+    ]}
+  >
+    <div class="flex items-center">
+      <a
+        href="/"
+        class:list={[
+          "inline-block rounded-full transition-all",
+          "m-1 sm:m-2 p-1",
+          "bg-light-primary hover:bg-light-accent",
+          "dark:bg-dark-primary hover:bg-dark-accent",
+        ]}
+      >
+        <Image
+          src={logoImage}
+          alt="M"
+          width={66}
+          class:list={["w-[42px] sm:w-[66px]"]}
+          quality={100}
+        />
+      </a>
+
+      <span class:list={["inline-block rounded-full", "m-1 sm:m-2 p-1"]}>
+        <DarkModeSwitch />
+      </span>
+    </div>
+
+    <div class="grow">
+      <ul class:list={["flex justify-end", "my-2 mr-2 sm:mr-6"]}>
+        {
+          links.map((link) => (
+            <li class:list={["flex ml-1 sm:ml-4"]}>
+              <a
+                href={link.href}
+                class:list={[
+                  "flex py-1 px-3 items-center rounded-sm transition-all",
+                  "bg-light-primary dark:bg-dark-primary",
+                  "text-dark-primary dark:text-light-secondary",
+                  "hover:bg-light-accent",
+                  "dark:hover:bg-dark-accent dark:hover:text-dark-primary",
+                ]}
+              >
+                <Icon name={link.icon} class="sm:text-xl" />
+
+                {link.title.length !== 0 && (
+                  <span class="pt-[1px] pl-[2px] sm:pl-1">{link.title}</span>
+                )}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -2,13 +2,13 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<div id="dark-mode-switch" class="group relative w-8 h-8 cursor-pointer">
+<div id="dark-mode-switch" class="group relative w-6 h-6 cursor-pointer">
   <span
     class:list={[
       "absolute inset-0 transition-all",
       "opacity-0 group-[.dark]:opacity-100",
       "rotate-0 group-[.dark]:rotate-90",
-      "text-orange-400",
+      "text-light-secondary",
     ]}
   >
     <Icon name="solar:sun-2-bold-duotone" class="w-full h-full" />
@@ -18,7 +18,7 @@ import { Icon } from "astro-icon/components";
       "absolute inset-0 transition-all",
       "opacity-100 group-[.dark]:opacity-0",
       "rotate-0 group-[.dark]:rotate-90",
-      "text-stone-900",
+      "text-dark-primary",
     ]}
   >
     <Icon name="solar:moon-bold-duotone" class="w-full h-full" />

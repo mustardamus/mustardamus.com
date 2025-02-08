@@ -1,2 +1,12 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-light-primary: var(--color-stone-50);
+  --color-light-secondary: var(--color-stone-200);
+  --color-light-accent: var(--color-orange-500);
+
+  --color-dark-primary: var(--color-stone-950);
+  --color-dark-secondary: var(--color-stone-900);
+  --color-dark-accent: var(--color-orange-500);
+}
