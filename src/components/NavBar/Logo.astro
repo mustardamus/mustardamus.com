@@ -1,0 +1,21 @@
+---
+import { Image } from "astro:assets";
+import logoImage from "@src/assets/images/logo.png";
+---
+
+<a
+  href="/"
+  class:list={[
+    "inline-block p-1 rounded-full transition-all",
+    "bg-light-primary hover:bg-light-accent",
+    "dark:bg-dark-primary hover:bg-dark-accent",
+  ]}
+>
+  <Image
+    src={logoImage}
+    alt="Mustardamus"
+    width={56}
+    class:list={["w-[42px] sm:w-[56px]"]}
+    quality={100}
+  />
+</a>

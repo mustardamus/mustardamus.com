@@ -1,0 +1,48 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  link: Link;
+}
+
+const { link } = Astro.props as Props;
+
+function isCurrentPage(href: string) {
+  const { pathname } = Astro.url;
+
+  if (pathname === href) {
+    return true;
+  }
+
+  return href !== "/" && pathname.startsWith(href);
+}
+---
+
+<a
+  href={link.href}
+  class:list={[
+    "flex py-1 px-3 items-center rounded-sm transition-all border-2",
+    "bg-light-primary dark:bg-dark-primary",
+    "text-dark-primary dark:text-light-secondary",
+    "hover:bg-light-accent",
+    "dark:hover:bg-dark-accent dark:hover:text-dark-primary",
+    isCurrentPage(link.href)
+      ? [
+          "border-light-accent dark:border-dark-accent",
+          "hover:text-dark-primary dark:hover:text-light-secondary",
+          "hover:bg-light-primary dark:hover:bg-dark-primary",
+        ]
+      : "border-transparent",
+  ]}
+>
+  <Icon name={link.icon} class="sm:text-xl" />
+
+  <span
+    class:list={[
+      "pt-[1px] pl-[2px] sm:pl-1",
+      link.href === "/" && "hidden sm:inline-block",
+    ]}
+  >
+    {link.title}
+  </span>
+</a>

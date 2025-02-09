@@ -1,24 +1,13 @@
 ---
-import { Image } from "astro:assets";
-import { Icon } from "astro-icon/components";
+import Logo from "./Logo.astro";
+import TopLink from "./TopLink.astro";
 import DarkModeSwitch from "@src/components/DarkModeSwitch.astro";
-import logoImage from "@src/assets/images/logo.png";
 
 interface Props {
   links: Link[];
 }
 
 const { links = [] } = Astro.props as Props;
-
-function isCurrentPage(href: string) {
-  const { pathname } = Astro.url;
-
-  if (pathname === href) {
-    return true;
-  }
-
-  return href !== "/" && pathname.startsWith(href);
-}
 ---
 
 <nav class:list={["container mx-auto select-none"]}>
@@ -30,24 +19,9 @@ function isCurrentPage(href: string) {
     ]}
   >
     <div class="flex items-center">
-      <a
-        href="/"
-        class:list={[
-          "inline-block rounded-full transition-all",
-          "m-1 sm:m-2 p-1",
-          "bg-light-primary hover:bg-light-accent",
-          "dark:bg-dark-primary hover:bg-dark-accent",
-        ]}
-      >
-        <Image
-          src={logoImage}
-          alt="M"
-          width={66}
-          class:list={["w-[42px] sm:w-[66px]"]}
-          quality={100}
-        />
-      </a>
-
+      <div class="m-1 sm:m-2">
+        <Logo />
+      </div>
       <span class:list={["inline-block rounded-full", "m-1 sm:m-2 p-1"]}>
         <DarkModeSwitch />
       </span>
@@ -57,35 +31,8 @@ function isCurrentPage(href: string) {
       <ul class:list={["flex justify-end", "my-2 mr-2 sm:mr-6"]}>
         {
           links.map((link) => (
-            <li class:list={["flex ml-1 sm:ml-4"]}>
-              <a
-                href={link.href}
-                class:list={[
-                  "flex py-1 px-3 items-center rounded-sm transition-all border-2",
-                  "bg-light-primary dark:bg-dark-primary",
-                  "text-dark-primary dark:text-light-secondary",
-                  "hover:bg-light-accent",
-                  "dark:hover:bg-dark-accent dark:hover:text-dark-primary",
-                  isCurrentPage(link.href)
-                    ? [
-                        "border-light-accent dark:border-dark-accent",
-                        "hover:text-dark-primary dark:hover:text-light-secondary",
-                        "hover:bg-light-primary dark:hover:bg-dark-primary",
-                      ]
-                    : "border-transparent",
-                ]}
-              >
-                <Icon name={link.icon} class="sm:text-xl" />
-
-                <span
-                  class:list={[
-                    "pt-[1px] pl-[2px] sm:pl-1",
-                    link.href === "/" && "hidden sm:inline-block",
-                  ]}
-                >
-                  {link.title}
-                </span>
-              </a>
+            <li class="ml-1 sm:ml-4">
+              <TopLink {link} />
             </li>
           ))
         }
