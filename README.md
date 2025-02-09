@@ -29,4 +29,5 @@
 ## Icons
 
 - [Solar Icon Set](https://icon-sets.iconify.design/solar/)
+- [CoreUI Brands Set](https://icon-sets.iconify.design/cib/)
 - [Astro Icon](https://www.astroicon.dev/guides/components/)

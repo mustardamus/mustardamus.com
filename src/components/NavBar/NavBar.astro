@@ -36,26 +36,27 @@ const { topLinks = [], socialLinks = [] } = Astro.props as Props;
   </div>
 
   <div class:list={["flex items-center", "mx-1 mt-1"]}>
-    <div
-      class:list={[
-        "inline-block rounded-full p-1 transition-all",
-        "ml-1 sm:ml-0",
-        "border-2 border-transparent",
-        "bg-light-secondary dark:bg-dark-secondary",
-        "hover:border-light-accent dark:hover:border-dark-accent",
-      ]}
-    >
-      <DarkModeSwitch />
-    </div>
-
-    <ul class="grow flex justify-end mt-1 mr-1 sm:mr-0">
+    <ul class="flex mt-1 ml-1 sm:ml-0">
       {
         socialLinks.map((link) => (
-          <li class="ml-1 sm:ml-2">
+          <li class="mr-1 sm:mr-2">
             <SocialLink {link} />
           </li>
         ))
       }
     </ul>
+
+    <div class="grow flex justify-end mr-1 sm:mr-0">
+      <div
+        class:list={[
+          "inline-block rounded-full p-1 transition-all",
+          "border-2 border-transparent",
+          "bg-light-secondary dark:bg-dark-secondary",
+          "hover:border-light-accent dark:hover:border-dark-accent",
+        ]}
+      >
+        <DarkModeSwitch />
+      </div>
+    </div>
   </div>
 </nav>
