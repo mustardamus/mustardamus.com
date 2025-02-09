@@ -1,10 +1,4 @@
-interface TopLink {
-  title: string;
-  href: string;
-  icon: string;
-}
-
-interface SocialLink {
+interface Link {
   title: string;
   href: string;
   icon: string;

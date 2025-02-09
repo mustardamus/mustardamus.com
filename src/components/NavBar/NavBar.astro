@@ -5,8 +5,8 @@ import SocialLink from "./SocialLink.astro";
 import DarkModeSwitch from "@src/components/DarkModeSwitch.astro";
 
 interface Props {
-  topLinks: TopLink[];
-  socialLinks: SocialLink[];
+  topLinks: Link[];
+  socialLinks: Link[];
 }
 
 const { topLinks = [], socialLinks = [] } = Astro.props as Props;

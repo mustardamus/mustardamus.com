@@ -3,12 +3,12 @@ import "@src/assets/css/global.css";
 import NavBar from "@src/components/NavBar/NavBar.astro";
 import Footer from "@src/components/Footer/Footer.astro";
 
-const topLinks: TopLink[] = [
+const topLinks: Link[] = [
   { title: "Home", href: "/", icon: "solar:home-bold-duotone" },
   { title: "Posts", href: "/posts", icon: "solar:book-bookmark-bold-duotone" },
 ];
 
-const socialLinks: SocialLink[] = [
+const socialLinks: Link[] = [
   {
     title: "GitHub",
     href: "https://github.com/mustardamus",
@@ -28,6 +28,39 @@ const socialLinks: SocialLink[] = [
     title: "Instagram",
     href: "https://instagram.com/find.balance.rest",
     icon: "cib:instagram",
+  },
+];
+
+const techLinks: Link[] = [
+  {
+    title: "Astro",
+    href: "https://astro.build",
+    icon: "lineicons:astro",
+  },
+  {
+    title: "TypeScript",
+    href: "https://www.typescriptlang.org/",
+    icon: "lineicons:typescript",
+  },
+  {
+    title: "TailwindCSS",
+    href: "https://tailwindcss.com/",
+    icon: "lineicons:tailwindcss",
+  },
+  {
+    title: "GitHub",
+    href: "https://github.com/",
+    icon: "lineicons:github",
+  },
+  {
+    title: "Debian",
+    href: "https://www.debian.org/",
+    icon: "simple-icons:debian",
+  },
+  {
+    title: "Helix",
+    href: "https://helix-editor.com/",
+    icon: "simple-icons:helix",
   },
 ];
 ---
@@ -50,6 +83,6 @@ const socialLinks: SocialLink[] = [
       <slot />
     </main>
 
-    <Footer />
+    <Footer {techLinks} />
   </body>
 </html>
