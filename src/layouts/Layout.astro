@@ -1,6 +1,7 @@
 ---
 import "@src/assets/css/global.css";
 import NavBar from "@src/components/NavBar/NavBar.astro";
+import Footer from "@src/components/Footer/Footer.astro";
 
 const topLinks: TopLink[] = [
   { title: "Home", href: "/", icon: "solar:home-bold-duotone" },
@@ -42,8 +43,13 @@ const socialLinks: SocialLink[] = [
     <title>Mustardamus</title>
   </head>
 
-  <body class="bg-light-primary dark:bg-dark-primary">
+  <body id="top" class="bg-light-primary dark:bg-dark-primary">
     <NavBar {topLinks} {socialLinks} />
-    <slot />
+
+    <main>
+      <slot />
+    </main>
+
+    <Footer />
   </body>
 </html>
