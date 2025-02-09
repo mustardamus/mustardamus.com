@@ -2,9 +2,32 @@
 import "@src/assets/css/global.css";
 import NavBar from "@src/components/NavBar/NavBar.astro";
 
-const links: Link[] = [
+const topLinks: TopLink[] = [
   { title: "Home", href: "/", icon: "solar:home-bold-duotone" },
   { title: "Posts", href: "/posts", icon: "solar:book-bookmark-bold-duotone" },
+];
+
+const socialLinks: SocialLink[] = [
+  {
+    title: "GitHub",
+    href: "https://github.com/mustardamus",
+    icon: "cib:github",
+  },
+  {
+    title: "Twitter",
+    href: "https://twitter.com/mustardamus",
+    icon: "cib:twitter",
+  },
+  {
+    title: "LinkedIn",
+    href: "https://www.linkedin.com/in/sebastian-senf-9b244b330",
+    icon: "cib:linkedin-in",
+  },
+  {
+    title: "Instagram",
+    href: "https://instagram.com/find.balance.rest",
+    icon: "cib:instagram",
+  },
 ];
 ---
 
@@ -19,8 +42,8 @@ const links: Link[] = [
     <title>Mustardamus</title>
   </head>
 
-  <body class="bg-light-primary dark:bg-dark-primary transition-all">
-    <NavBar {links} />
+  <body class="bg-light-primary dark:bg-dark-primary">
+    <NavBar {topLinks} {socialLinks} />
     <slot />
   </body>
 </html>

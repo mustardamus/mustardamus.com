@@ -1,16 +1,18 @@
 ---
 import Logo from "./Logo.astro";
 import TopLink from "./TopLink.astro";
+import SocialLink from "./SocialLink.astro";
 import DarkModeSwitch from "@src/components/DarkModeSwitch.astro";
 
 interface Props {
-  links: Link[];
+  topLinks: TopLink[];
+  socialLinks: SocialLink[];
 }
 
-const { links = [] } = Astro.props as Props;
+const { topLinks = [], socialLinks = [] } = Astro.props as Props;
 ---
 
-<nav class:list={["container mx-auto select-none"]}>
+<nav class="container mx-auto select-none">
   <div
     class:list={[
       "flex items-center",
@@ -18,25 +20,42 @@ const { links = [] } = Astro.props as Props;
       "bg-light-secondary dark:bg-dark-secondary",
     ]}
   >
-    <div class="flex items-center">
-      <div class="m-1 sm:m-2">
-        <Logo />
-      </div>
-      <span class:list={["inline-block rounded-full", "m-1 sm:m-2 p-1"]}>
-        <DarkModeSwitch />
-      </span>
+    <div class="flex items-center m-1 sm:m-2">
+      <Logo />
     </div>
 
-    <div class="grow">
-      <ul class:list={["flex justify-end", "my-2 mr-2 sm:mr-6"]}>
-        {
-          links.map((link) => (
-            <li class="ml-1 sm:ml-4">
-              <TopLink {link} />
-            </li>
-          ))
-        }
-      </ul>
+    <ul class="grow flex justify-end my-2 mr-2 sm:mr-6">
+      {
+        topLinks.map((link) => (
+          <li class="ml-1 sm:ml-4">
+            <TopLink {link} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class:list={["flex items-center", "mx-1 mt-1"]}>
+    <div
+      class:list={[
+        "inline-block rounded-full p-1 transition-all",
+        "ml-1 sm:ml-0",
+        "border-2 border-transparent",
+        "bg-light-secondary dark:bg-dark-secondary",
+        "hover:border-light-accent dark:hover:border-dark-accent",
+      ]}
+    >
+      <DarkModeSwitch />
     </div>
+
+    <ul class="grow flex justify-end mt-1 mr-1 sm:mr-0">
+      {
+        socialLinks.map((link) => (
+          <li class="ml-1 sm:ml-2">
+            <SocialLink {link} />
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </nav>

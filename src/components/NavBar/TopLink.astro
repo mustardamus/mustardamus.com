@@ -2,7 +2,7 @@
 import { Icon } from "astro-icon/components";
 
 interface Props {
-  link: Link;
+  link: TopLink;
 }
 
 const { link } = Astro.props as Props;
@@ -21,7 +21,7 @@ function isCurrentPage(href: string) {
 <a
   href={link.href}
   class:list={[
-    "flex py-1 px-3 items-center rounded-sm transition-all border-2",
+    "flex py-1 px-3 items-center rounded-sm transition-all border-2 min-h-full",
     "bg-light-primary dark:bg-dark-primary",
     "text-dark-primary dark:text-light-secondary",
     "hover:bg-light-accent",
