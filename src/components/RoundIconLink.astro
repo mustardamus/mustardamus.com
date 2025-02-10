@@ -4,9 +4,14 @@ import { Icon } from "astro-icon/components";
 interface Props {
   link: Link;
   target?: string;
+  bgClass?: string;
 }
 
-const { link, target = "" } = Astro.props as Props;
+const {
+  link,
+  target = "",
+  bgClass = "bg-light-secondary dark:bg-dark-secondary",
+} = Astro.props as Props;
 ---
 
 <a
@@ -14,8 +19,8 @@ const { link, target = "" } = Astro.props as Props;
   title={link.title}
   {target}
   class:list={[
+    bgClass,
     "inline-block rounded-full p-1 transition-all",
-    "bg-light-secondary dark:bg-dark-secondary",
     "text-dark-secondary dark:text-light-secondary",
     "border-2 border-transparent hover:border-light-accent",
   ]}
