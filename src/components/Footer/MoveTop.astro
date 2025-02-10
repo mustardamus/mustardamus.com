@@ -1,0 +1,25 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<a
+  href="#top"
+  title="Up to the top!"
+  class:list={[
+    "inline-block rounded-full p-1 transition-all",
+    "border-2 border-transparent",
+    "bg-light-secondary dark:bg-dark-secondary",
+    "text-dark-primary dark:text-light-secondary",
+    "hover:border-light-accent dark:hover:border-dark-accent",
+  ]}
+>
+  <Icon name="solar:round-double-alt-arrow-up-bold-duotone" size={24} />
+</a>
+
+<script is:inline>
+  document.querySelector("a[href='#top']")?.addEventListener("click", (e) => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    e.preventDefault();
+    return false;
+  });
+</script>

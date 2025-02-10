@@ -1,0 +1,30 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  techLinks: Link[];
+}
+
+const { techLinks = [] } = Astro.props as Props;
+---
+
+<ul class="">
+  {
+    techLinks.map((link) => (
+      <li class="my-1 opacity-60 first:opacity-100 text-sm">
+        <a
+          href={link.href}
+          target="_blank"
+          class:list={[
+            "group flex items-center transition-all",
+            "text-dark-secondary dark:text-light-secondary",
+            "hover:text-light-accent dark:hover:text-dark-accent",
+          ]}
+        >
+          <Icon name={link.icon} size={18} />
+          <span class="pl-1">{link.title}</span>
+        </a>
+      </li>
+    ))
+  }
+</ul>
