@@ -1,20 +1,14 @@
 ---
-import { Icon } from "astro-icon/components";
+import RoundIconLink from "../RoundIconLink.astro";
 ---
 
-<a
-  href="#top"
-  title="Up to the top!"
-  class:list={[
-    "inline-block rounded-full p-1 transition-all",
-    "border-2 border-transparent",
-    "bg-light-secondary dark:bg-dark-secondary",
-    "text-dark-primary dark:text-light-secondary",
-    "hover:border-light-accent dark:hover:border-dark-accent",
-  ]}
->
-  <Icon name="solar:round-double-alt-arrow-up-bold-duotone" size={24} />
-</a>
+<RoundIconLink
+  link={{
+    title: "Up to the top!",
+    href: "#top",
+    icon: "solar:round-double-alt-arrow-up-bold-duotone",
+  }}
+/>
 
 <script is:inline>
   document.querySelector("a[href='#top']")?.addEventListener("click", (e) => {

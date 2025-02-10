@@ -1,7 +1,7 @@
 ---
 import Logo from "./Logo.astro";
 import TopLink from "./TopLink.astro";
-import SocialLink from "./SocialLink.astro";
+import RoundIconLink from "../RoundIconLink.astro";
 import DarkModeSwitch from "@src/components/DarkModeSwitch.astro";
 
 interface Props {
@@ -40,7 +40,7 @@ const { topLinks = [], socialLinks = [] } = Astro.props as Props;
       {
         socialLinks.map((link) => (
           <li class="mr-1 sm:mr-2">
-            <SocialLink {link} />
+            <RoundIconLink {link} target="_blank" />
           </li>
         ))
       }

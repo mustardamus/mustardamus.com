@@ -2,16 +2,17 @@
 import { Icon } from "astro-icon/components";
 
 interface Props {
-  link: SocialLink;
+  link: Link;
+  target?: string;
 }
 
-const { link } = Astro.props as Props;
+const { link, target = "" } = Astro.props as Props;
 ---
 
 <a
   href={link.href}
   title={link.title}
-  target="_blank"
+  {target}
   class:list={[
     "inline-block rounded-full p-1 transition-all",
     "bg-light-secondary dark:bg-dark-secondary",
