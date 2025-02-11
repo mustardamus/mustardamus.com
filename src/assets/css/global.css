@@ -10,3 +10,17 @@
   --color-dark-secondary: var(--color-stone-900);
   --color-dark-accent: var(--color-orange-500);
 }
+
+
+.astro-code {
+  padding: 1rem;
+  margin: 0.5rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-light-secondary) !important;
+}
+
+.dark .astro-code,
+.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--color-dark-secondary) !important;
+}

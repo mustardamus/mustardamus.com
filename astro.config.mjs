@@ -11,4 +11,12 @@ export default defineConfig({
     plugins: [tailwindcss(), cssRemoveUnusedVars()],
   },
   integrations: [astroIcon()],
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: "one-light",
+        dark: "tokyo-night",
+      },
+    },
+  },
 });
