@@ -12,11 +12,11 @@ interface Props {
 const { topLinks = [], socialLinks = [] } = Astro.props as Props;
 ---
 
-<nav class="container mx-auto select-none">
+<nav>
   <div
     class:list={[
-      "flex items-center",
-      "sm:mt-4 sm:mx-1 sm:rounded-sm",
+      "flex items-center select-none",
+      "sm:mt-4 sm:rounded-sm",
       "bg-light-secondary dark:bg-dark-secondary",
     ]}
   >

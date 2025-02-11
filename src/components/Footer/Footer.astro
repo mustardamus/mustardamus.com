@@ -13,7 +13,7 @@ interface Props {
 const { techLinks = [], topLinks = [] } = Astro.props as Props;
 ---
 
-<footer class="container mx-auto select-none">
+<footer class="select-none">
   <div class="flex justify-end mr-2 sm:mr-1">
     <MoveTop />
   </div>
@@ -21,7 +21,7 @@ const { techLinks = [], topLinks = [] } = Astro.props as Props;
   <div
     class:list={[
       "flex flex-col sm:flex-row",
-      "mt-2 p-2 sm:mb-8 sm:mx-1 sm:rounded-sm",
+      "mt-2 p-2 sm:mb-8 sm:rounded-sm",
       "bg-light-secondary dark:bg-dark-secondary",
       "text-dark-secondary dark:text-light-secondary",
     ]}

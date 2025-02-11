@@ -86,10 +86,16 @@ const techLinks: Link[] = [
     <title>Mustardamus</title>
   </head>
 
-  <body id="top" class="bg-light-primary dark:bg-dark-primary">
+  <body
+    id="top"
+    class:list={[
+      "container mx-auto md:max-w-6xl md:px-4 lg:px-0",
+      "bg-light-primary dark:bg-dark-primary",
+    ]}
+  >
     <NavBar {topLinks} {socialLinks} />
 
-    <main class="container mx-auto">
+    <main>
       <slot />
     </main>
 
