@@ -1,0 +1,49 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import Layout from "@src/layouts/Layout.astro";
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/data/photos/digital-nomad/**/*.JPG",
+);
+
+const imagesKeys = Object.keys(images);
+const cities = imagesKeys.reduce((arr: Record<string, any>[], imagePath) => {
+  const pathSplit = imagePath.split("/");
+  const city = pathSplit.at(-2) || "";
+  const cityExists = arr.find((obj) => obj.city === city);
+
+  if (!cityExists) {
+    const photos = imagesKeys
+      .filter((imagePath) => imagePath.includes(city))
+      .map((imagePath) => ({
+        fileName: imagePath.split("/").at(-1),
+        import: images[imagePath],
+      }));
+
+    arr.push({ city, country: pathSplit.at(-3), photos });
+  }
+
+  return arr;
+}, []);
+---
+
+<Layout>
+  {
+    cities.map((city) => (
+      <div>
+        <h1>
+          {city.city}/{city.country}
+        </h1>
+
+        <ul class="flex">
+          {city.photos.map((photo) => (
+            <li>
+              <Image src={photo.import()} alt={photo.fileName} width={200} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</Layout>
