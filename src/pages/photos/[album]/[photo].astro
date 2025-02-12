@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import { getAlbumPhotos, getAlbumPhoto } from "@src/lib/photos.ts";
+import Layout from "@src/layouts/Layout.astro";
 import type { GetStaticPaths } from "astro";
 
 interface Params {
@@ -6,12 +9,20 @@ interface Params {
   photo: string;
 }
 
-const { album, photo } = Astro.params as Params;
-
 export const getStaticPaths = (() => {
-  return [];
+  const albums = ["digital-nomad"];
+
+  return albums.flatMap((album) => {
+    return getAlbumPhotos(album).map((photo) => {
+      return { params: { album: photo.album, photo: photo.name } };
+    });
+  });
 }) satisfies GetStaticPaths;
+
+const { album, photo } = Astro.params as Params;
+const photoObj = getAlbumPhoto(album, photo);
 ---
 
-{album}
-{photo}
+<Layout>
+  {photoObj && <Image src={photoObj.import()} alt={photoObj.name} />}
+</Layout>

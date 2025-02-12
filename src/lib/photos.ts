@@ -20,7 +20,7 @@ export function getAlbumPhotos(album: string): Photo[] {
     });
 }
 
-export function getAlbumSorted(album: string) {
+export function getAlbumSorted(album: string): Album {
   const photos = getAlbumPhotos(album);
   const subAlbums = photos.reduce((subAlbums: SubAlbum[], photo: Photo) => {
     const subAlbum = photo.subAlbum;
@@ -37,4 +37,9 @@ export function getAlbumSorted(album: string) {
   }, []);
 
   return { name: album, subAlbums };
+}
+
+export function getAlbumPhoto(album: string, name: string): Photo | undefined {
+  const photos = getAlbumPhotos(album);
+  return photos.find((p) => p.name === name);
 }
