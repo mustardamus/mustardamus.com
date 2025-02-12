@@ -7,13 +7,19 @@ interface Link {
 }
 
 interface Photo {
+  album: string;
+  subAlbum: string;
   path: string;
   name: string;
   import: () => Promise<{ default: ImageMetadata }>;
 }
 
+interface SubAlbum {
+  name: string;
+  photos: Photo[];
+}
+
 interface Album {
   name: string;
-  subName: string | undefined;
-  photos: Photo[];
+  subAlbums: SubAlbum[];
 }

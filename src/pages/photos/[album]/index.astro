@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "@src/layouts/Layout.astro";
-import type { GetStaticPaths, ImageMetadata } from "astro";
-import type { Album } from "@src/env";
+import { getAlbumSorted } from "@src/lib/photos.ts";
+import type { GetStaticPaths } from "astro";
 
 interface Params {
   album: string;
@@ -13,45 +13,23 @@ export const getStaticPaths = (() => {
 }) satisfies GetStaticPaths;
 
 const { album } = Astro.params as Params;
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/data/photos/**/*",
-);
-const imagesKeys = Object.keys(images);
-const subAlbums = imagesKeys
-  .filter((imagePath) => imagePath.includes(`/${album}/`))
-  .reduce((arr: Album[], imagePath) => {
-    const pathSplit = imagePath.split("/");
-    const subName = pathSplit.at(-2) || "";
-    const albumExists = arr.find((obj) => obj.subName === subName);
-
-    if (!albumExists) {
-      const pathSplit = imagePath.split("/");
-      const subName = pathSplit.at(-2) || "";
-      const photos = imagesKeys
-        .filter((imagePath) => imagePath.includes(subName))
-        .map((imagePath) => ({
-          path: imagePath,
-          name: pathSplit.at(-1) || "",
-          import: images[imagePath],
-        }));
-
-      arr.push({ name: album, subName, photos });
-    }
-
-    return arr;
-  }, []);
+const albumObj = getAlbumSorted(album);
 ---
 
 <Layout>
+  <h1 class="text-4xl">{albumObj.name}</h1>
+
   {
-    subAlbums.map((subAlbum) => (
+    albumObj.subAlbums.map((subAlbum) => (
       <div>
-        <h1>{subAlbum.subName}</h1>
+        <h2>{subAlbum.name}</h2>
 
         <ul class="flex">
           {subAlbum.photos.map((photo) => (
             <li>
-              <Image src={photo.import()} alt={photo.name} width={200} />
+              <a href={`/photos/${album}/${photo.name}`}>
+                <Image src={photo.import()} alt={photo.name} width={200} />
+              </a>
             </li>
           ))}
         </ul>

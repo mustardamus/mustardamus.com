@@ -1,0 +1,17 @@
+---
+import type { GetStaticPaths } from "astro";
+
+interface Params {
+  album: string;
+  photo: string;
+}
+
+const { album, photo } = Astro.params as Params;
+
+export const getStaticPaths = (() => {
+  return [];
+}) satisfies GetStaticPaths;
+---
+
+{album}
+{photo}
