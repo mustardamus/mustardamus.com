@@ -4,52 +4,57 @@ import { Image } from "astro:assets";
 import Layout from "@src/layouts/Layout.astro";
 
 interface Photo {
-  fileName: string;
+  path: string;
+  name: string;
   import: () => Promise<{ default: ImageMetadata }>;
 }
 
-interface City {
-  city: string;
-  country: string;
+interface Album {
+  name: string;
+  subName: string | undefined;
   photos: Photo[];
 }
 
+const album = "digital-nomad";
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/data/photos/digital-nomad/**/*.JPG",
+  "/src/data/photos/**/*",
 );
 const imagesKeys = Object.keys(images);
-const cities = imagesKeys.reduce((arr: City[], imagePath) => {
-  const pathSplit = imagePath.split("/");
-  const city = pathSplit.at(-2) || "";
-  const cityExists = arr.find((obj) => obj.city === city);
+const subAlbums = imagesKeys
+  .filter((imagePath) => imagePath.includes(`/${album}/`))
+  .reduce((arr: Album[], imagePath) => {
+    const pathSplit = imagePath.split("/");
+    const subName = pathSplit.at(-2) || "";
+    const albumExists = arr.find((obj) => obj.subName === subName);
 
-  if (!cityExists) {
-    const photos = imagesKeys
-      .filter((imagePath) => imagePath.includes(city))
-      .map((imagePath) => ({
-        fileName: imagePath.split("/").at(-1) || "",
-        import: images[imagePath],
-      }));
+    if (!albumExists) {
+      const pathSplit = imagePath.split("/");
+      const subName = pathSplit.at(-2) || "";
+      const photos = imagesKeys
+        .filter((imagePath) => imagePath.includes(subName))
+        .map((imagePath) => ({
+          path: imagePath,
+          name: pathSplit.at(-1) || "",
+          import: images[imagePath],
+        }));
 
-    arr.push({ city, country: pathSplit.at(-3) || "", photos });
-  }
+      arr.push({ name: album, subName, photos });
+    }
 
-  return arr;
-}, []);
+    return arr;
+  }, []);
 ---
 
 <Layout>
   {
-    cities.map((city) => (
+    subAlbums.map((subAlbum) => (
       <div>
-        <h1>
-          {city.city}/{city.country}
-        </h1>
+        <h1>{subAlbum.subName}</h1>
 
         <ul class="flex">
-          {city.photos.map((photo) => (
+          {subAlbum.photos.map((photo) => (
             <li>
-              <Image src={photo.import()} alt={photo.fileName} width={200} />
+              <Image src={photo.import()} alt={photo.name} width={200} />
             </li>
           ))}
         </ul>
