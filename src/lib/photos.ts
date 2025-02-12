@@ -43,3 +43,8 @@ export function getAlbumPhoto(album: string, name: string): Photo | undefined {
   const photos = getAlbumPhotos(album);
   return photos.find((p) => p.name === name);
 }
+
+export function getSubAlbumPhotos(album: string, subAlbum: string) {
+  return getAlbumSorted(album)?.subAlbums.find((s) => s.name === subAlbum)
+    ?.photos;
+}

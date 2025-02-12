@@ -1,6 +1,10 @@
 ---
 import { Image } from "astro:assets";
-import { getAlbumPhotos, getAlbumPhoto } from "@src/lib/photos.ts";
+import {
+  getAlbumPhotos,
+  getAlbumPhoto,
+  getSubAlbumPhotos,
+} from "@src/lib/photos.ts";
 import Layout from "@src/layouts/Layout.astro";
 import type { GetStaticPaths } from "astro";
 
@@ -21,8 +25,20 @@ export const getStaticPaths = (() => {
 
 const { album, photo } = Astro.params as Params;
 const photoObj = getAlbumPhoto(album, photo);
+const subAlbumPhotos = getSubAlbumPhotos(album, photoObj?.subAlbum || "") || [];
 ---
 
 <Layout>
   {photoObj && <Image src={photoObj.import()} alt={photoObj.name} />}
+  <ul class="flex">
+    {
+      subAlbumPhotos.map((photo) => (
+        <li>
+          <a href={`/photos/${album}/${photo.name}`}>
+            <Image src={photo.import()} alt={photo.name} />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </Layout>
