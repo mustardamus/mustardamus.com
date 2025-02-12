@@ -44,7 +44,30 @@ export function getAlbumPhoto(album: string, name: string): Photo | undefined {
   return photos.find((p) => p.name === name);
 }
 
-export function getSubAlbumPhotos(album: string, subAlbum: string) {
+export function getSubAlbumPhotos(
+  album: string,
+  subAlbum: string,
+): Photo[] | undefined {
   return getAlbumSorted(album)?.subAlbums.find((s) => s.name === subAlbum)
     ?.photos;
+}
+
+export function getPreviousPhoto(photo: Photo): Photo | undefined {
+  const photos = getAlbumPhotos(photo.album) || [];
+  const names = photos.map((p) => p.name);
+  const index = names.indexOf(photo.name) - 1;
+
+  return photos.at(index);
+}
+
+export function getNextPhoto(photo: Photo): Photo | undefined {
+  const photos = getAlbumPhotos(photo.album) || [];
+  const names = photos.map((p) => p.name);
+  let index = names.indexOf(photo.name) + 1;
+
+  if (index === photos.length) {
+    index = 0;
+  }
+
+  return photos.at(index);
 }

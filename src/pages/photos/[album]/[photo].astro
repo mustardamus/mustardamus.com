@@ -4,9 +4,12 @@ import {
   getAlbumPhotos,
   getAlbumPhoto,
   getSubAlbumPhotos,
+  getPreviousPhoto,
+  getNextPhoto,
 } from "@src/lib/photos.ts";
 import Layout from "@src/layouts/Layout.astro";
 import type { GetStaticPaths } from "astro";
+import type { Photo } from "@src/env";
 
 interface Params {
   album: string;
@@ -25,11 +28,42 @@ export const getStaticPaths = (() => {
 
 const { album, photo } = Astro.params as Params;
 const photoObj = getAlbumPhoto(album, photo);
-const subAlbumPhotos = getSubAlbumPhotos(album, photoObj?.subAlbum || "") || [];
+let subAlbumPhotos: Photo[] = [];
+let previousPhoto: Photo | undefined;
+let nextPhoto: Photo | undefined;
+
+if (photoObj) {
+  subAlbumPhotos = getSubAlbumPhotos(album, photoObj.subAlbum) || [];
+  previousPhoto = getPreviousPhoto(photoObj);
+  nextPhoto = getNextPhoto(photoObj);
+}
 ---
 
 <Layout>
+  <div class="flex">
+    <div>
+      {
+        previousPhoto && (
+          <a href={`/photos/${album}/${previousPhoto.name}`}>
+            <Image src={previousPhoto.import()} alt={previousPhoto.name} />
+          </a>
+        )
+      }
+    </div>
+    <div>
+      {
+        nextPhoto && (
+          <a href={`/photos/${album}/${nextPhoto.name}`}>
+            <Image src={nextPhoto.import()} alt={nextPhoto.name} />
+          </a>
+        )
+      }
+    </div>
+  </div>
+
   {photoObj && <Image src={photoObj.import()} alt={photoObj.name} />}
+
+  <h2>More form {photoObj?.subAlbum}</h2>
   <ul class="flex">
     {
       subAlbumPhotos.map((photo) => (
