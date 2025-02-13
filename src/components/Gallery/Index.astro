@@ -12,21 +12,49 @@ let title = nameSplit[0];
 let subTitle = nameSplit.length !== 1 && nameSplit[1];
 ---
 
-<div>
-  <h2>
-    {title}
-    {subTitle && `/ ${subTitle}`}
-  </h2>
+<div class="flex items-center">
+  <div class="w-1/2 pb-4">
+    <h2
+      class:list={[
+        "text-2xl sm:text-3xl lg:text-4xl",
+        "text-dark-secondary dark:text-light-secondary",
+      ]}
+    >
+      {title}
+      {subTitle && <span class="opacity-70 text-xl">{subTitle}</span>}
+    </h2>
+  </div>
 
-  <ul class="flex">
-    {
-      subAlbum.photos.map((photo) => (
-        <li>
-          <a href={`/photos/${photo.album}/${photo.name}`}>
-            <Image src={photo.import()} alt={photo.name} width={200} />
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+  <div class="w-1/2 text-right">
+    <a href={`/photos/${subAlbum?.photos[0]?.album}`}> All photos in album </a>
+  </div>
 </div>
+
+<ul class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-1">
+  {
+    subAlbum.photos.map((photo) => (
+      <li>
+        <a
+          href={`/photos/${photo.album}/${photo.name}`}
+          class:list={[
+            "block rounded-sm p-1 transition-all",
+            "bg-light-secondary dark:bg-dark-secondary",
+            "hover:bg-light-accent dark:hover:bg-dark-accent",
+          ]}
+        >
+          <Image
+            src={photo.import()}
+            alt={photo.name}
+            widths={[300, 240, 220, 1024]}
+            sizes={`
+              (max-width: 640px) 300px,
+              (max-width: 720px) 240px,
+              (max-width: 1024px) 220px,
+              1024px`}
+            class="rounded-sm"
+          />
+        </a>
+      </li>
+    ))
+  }
+</ul>
