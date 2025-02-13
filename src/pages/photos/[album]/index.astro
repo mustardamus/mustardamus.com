@@ -1,6 +1,6 @@
 ---
-import { Image } from "astro:assets";
 import Layout from "@src/layouts/Layout.astro";
+import GalleryIndex from "@src/components/Gallery/Index.astro";
 import { getAlbumSorted } from "@src/lib/photos.ts";
 import type { GetStaticPaths } from "astro";
 
@@ -19,21 +19,5 @@ const albumObj = getAlbumSorted(album);
 <Layout>
   <h1 class="text-4xl">{albumObj.name}</h1>
 
-  {
-    albumObj.subAlbums.map((subAlbum) => (
-      <div>
-        <h2>{subAlbum.name}</h2>
-
-        <ul class="flex">
-          {subAlbum.photos.map((photo) => (
-            <li>
-              <a href={`/photos/${album}/${photo.name}`}>
-                <Image src={photo.import()} alt={photo.name} width={200} />
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    ))
-  }
+  {albumObj.subAlbums.map((subAlbum) => <GalleryIndex {subAlbum} />)}
 </Layout>

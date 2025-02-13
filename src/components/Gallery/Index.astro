@@ -1,0 +1,32 @@
+---
+import { Image } from "astro:assets";
+import type { SubAlbum } from "@src/env";
+
+interface Props {
+  subAlbum: SubAlbum;
+}
+
+const { subAlbum } = Astro.props as Props;
+const nameSplit = subAlbum.name.split("_");
+let title = nameSplit[0];
+let subTitle = nameSplit.length !== 1 && nameSplit[1];
+---
+
+<div>
+  <h2>
+    {title}
+    {subTitle && `/ ${subTitle}`}
+  </h2>
+
+  <ul class="flex">
+    {
+      subAlbum.photos.map((photo) => (
+        <li>
+          <a href={`/photos/${photo.album}/${photo.name}`}>
+            <Image src={photo.import()} alt={photo.name} width={200} />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

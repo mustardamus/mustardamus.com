@@ -44,12 +44,11 @@ export function getAlbumPhoto(album: string, name: string): Photo | undefined {
   return photos.find((p) => p.name === name);
 }
 
-export function getSubAlbumPhotos(
+export function getSubAlbum(
   album: string,
   subAlbum: string,
-): Photo[] | undefined {
-  return getAlbumSorted(album)?.subAlbums.find((s) => s.name === subAlbum)
-    ?.photos;
+): SubAlbum | undefined {
+  return getAlbumSorted(album)?.subAlbums.find((s) => s.name === subAlbum);
 }
 
 export function getPreviousPhoto(photo: Photo): Photo | undefined {

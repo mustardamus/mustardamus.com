@@ -3,13 +3,14 @@ import { Image } from "astro:assets";
 import {
   getAlbumPhotos,
   getAlbumPhoto,
-  getSubAlbumPhotos,
+  getSubAlbum,
   getPreviousPhoto,
   getNextPhoto,
 } from "@src/lib/photos.ts";
 import Layout from "@src/layouts/Layout.astro";
+import GalleryIndex from "@src/components/Gallery/Index.astro";
 import type { GetStaticPaths } from "astro";
-import type { Photo } from "@src/env";
+import type { Photo, SubAlbum } from "@src/env";
 
 interface Params {
   album: string;
@@ -28,12 +29,12 @@ export const getStaticPaths = (() => {
 
 const { album, photo } = Astro.params as Params;
 const photoObj = getAlbumPhoto(album, photo);
-let subAlbumPhotos: Photo[] = [];
+let subAlbum: SubAlbum | undefined;
 let previousPhoto: Photo | undefined;
 let nextPhoto: Photo | undefined;
 
 if (photoObj) {
-  subAlbumPhotos = getSubAlbumPhotos(album, photoObj.subAlbum) || [];
+  subAlbum = getSubAlbum(album, photoObj.subAlbum) || [];
   previousPhoto = getPreviousPhoto(photoObj);
   nextPhoto = getNextPhoto(photoObj);
 }
@@ -63,16 +64,5 @@ if (photoObj) {
 
   {photoObj && <Image src={photoObj.import()} alt={photoObj.name} />}
 
-  <h2>More form {photoObj?.subAlbum}</h2>
-  <ul class="flex">
-    {
-      subAlbumPhotos.map((photo) => (
-        <li>
-          <a href={`/photos/${album}/${photo.name}`}>
-            <Image src={photo.import()} alt={photo.name} />
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+  <GalleryIndex {subAlbum} />
 </Layout>
