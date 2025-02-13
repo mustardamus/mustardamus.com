@@ -34,7 +34,7 @@ let previousPhoto: Photo | undefined;
 let nextPhoto: Photo | undefined;
 
 if (photoObj) {
-  subAlbum = getSubAlbum(album, photoObj.subAlbum) || [];
+  subAlbum = getSubAlbum(album, photoObj.subAlbum);
   previousPhoto = getPreviousPhoto(photoObj);
   nextPhoto = getNextPhoto(photoObj);
 }
@@ -63,6 +63,5 @@ if (photoObj) {
   </div>
 
   {photoObj && <Image src={photoObj.import()} alt={photoObj.name} />}
-
-  <GalleryIndex {subAlbum} />
+  {subAlbum && <GalleryIndex {subAlbum} showBackLink={true} />}
 </Layout>

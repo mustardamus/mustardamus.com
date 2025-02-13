@@ -4,9 +4,10 @@ import type { SubAlbum } from "@src/env";
 
 interface Props {
   subAlbum: SubAlbum;
+  showBackLink: boolean;
 }
 
-const { subAlbum } = Astro.props as Props;
+const { subAlbum, showBackLink = false } = Astro.props as Props;
 const nameSplit = subAlbum.name.split("_");
 let title = nameSplit[0];
 let subTitle = nameSplit.length !== 1 && nameSplit[1];
@@ -25,9 +26,15 @@ let subTitle = nameSplit.length !== 1 && nameSplit[1];
     </h2>
   </div>
 
-  <div class="w-1/2 text-right">
-    <a href={`/photos/${subAlbum?.photos[0]?.album}`}> All photos in album </a>
-  </div>
+  {
+    showBackLink && (
+      <div class="w-1/2 text-right">
+        <a href={`/photos/${subAlbum?.photos[0]?.album}`}>
+          All photos in album
+        </a>
+      </div>
+    )
+  }
 </div>
 
 <ul class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-1">
@@ -45,12 +52,11 @@ let subTitle = nameSplit.length !== 1 && nameSplit[1];
           <Image
             src={photo.import()}
             alt={photo.name}
-            widths={[300, 240, 220, 1024]}
+            quality={70}
+            widths={[300, 240]}
             sizes={`
               (max-width: 640px) 300px,
-              (max-width: 720px) 240px,
-              (max-width: 1024px) 220px,
-              1024px`}
+              240px`}
             class="rounded-sm"
           />
         </a>
