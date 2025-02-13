@@ -20,19 +20,19 @@ const nextPhoto = getNextPhoto(photo);
   ]}
 >
   <div class="flex flex-wrap items-center justify-center">
-    <div class="w-ull lg:w-6/8">
+    <div class="w-full text-center">
       <Image
         src={photo.import()}
         alt={photo.name}
-        width={1024}
-        class="rounded-sm"
+        width={1280}
+        class="rounded-sm inline-block"
       />
     </div>
 
     <div
       class:list={[
-        "w-1/2 lg:w-1/8 mt-2 lg:mt-0 lg:order-first",
-        "lg:translate-x-3 lg:scale-120",
+        "w-1/2 mt-2 lg:h-0 lg:pt-1",
+        "-translate-x-4 lg:-translate-y-160",
       ]}
     >
       {previousPhoto && <PrevNextPhoto photo={previousPhoto} />}
@@ -40,11 +40,11 @@ const nextPhoto = getNextPhoto(photo);
 
     <div
       class:list={[
-        "w-1/2 lg:w-1/8 mt-2 lg:mt-0 text-right",
-        "lg:-translate-x-3 lg:scale-120",
+        "w-1/2 mt-2 text-right lg:h-0 lg:pt-1",
+        "translate-x-4 lg:-translate-y-160",
       ]}
     >
-      {nextPhoto && <PrevNextPhoto photo={nextPhoto} />}
+      {nextPhoto && <PrevNextPhoto photo={nextPhoto} isNext={true} />}
     </div>
   </div>
 </div>

@@ -1,22 +1,44 @@
 ---
 import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 import type { Photo } from "@src/env";
 
 interface Props {
   photo: Photo;
+  isNext?: boolean;
 }
 
-const { photo } = Astro.props as Props;
+const { photo, isNext = false } = Astro.props as Props;
 ---
 
 <a
   href={`/photos/${photo.album}/${photo.name}`}
-  class:list={[
-    "inline-block p-1 rounded-sm transition-all",
-    "bg-light-primary dark:bg-dark-primary",
-    "lg:bg-light-secondary lg:dark:bg-dark-secondary",
-    "hover:bg-light-accent dark:hover:bg-dark-accent",
-  ]}
+  class="group inline-flex items-center rounded-sm transition-all"
 >
-  <Image src={photo.import()} alt={photo.name} width={240} class="rounded-sm" />
+  <Icon
+    name={`solar:round-alt-arrow-${isNext ? "right" : "left"}-bold`}
+    size={28}
+    class:list={[
+      "rounded-full transition-all",
+      "bg-light-secondary dark:bg-dark-secondary",
+      "text-dark-secondary dark:text-light-secondary",
+      "group-hover:text-light-accent group-hover:dark:text-light-accent",
+      isNext
+        ? ["order-2 -translate-x-3 group-hover:-translate-x-1"]
+        : ["translate-x-3 group-hover:translate-x-1"],
+    ]}
+  />
+  <span
+    class:list={[
+      "lg:p-0.5 lg:rounded-sm",
+      "lg:bg-light-secondary lg:dark:bg-dark-secondary",
+    ]}
+  >
+    <Image
+      src={photo.import()}
+      alt={photo.name}
+      width={180}
+      class="rounded-sm"
+    />
+  </span>
 </a>
