@@ -1,0 +1,22 @@
+---
+import { Image } from "astro:assets";
+import type { Photo } from "@src/env";
+
+interface Props {
+  photo: Photo;
+}
+
+const { photo } = Astro.props as Props;
+---
+
+<a
+  href={`/photos/${photo.album}/${photo.name}`}
+  class:list={[
+    "inline-block p-1 rounded-sm transition-all",
+    "bg-light-primary dark:bg-dark-primary",
+    "lg:bg-light-secondary lg:dark:bg-dark-secondary",
+    "hover:bg-light-accent dark:hover:bg-dark-accent",
+  ]}
+>
+  <Image src={photo.import()} alt={photo.name} width={240} class="rounded-sm" />
+</a>

@@ -1,0 +1,50 @@
+---
+import { Image } from "astro:assets";
+import { getPreviousPhoto, getNextPhoto } from "@src/lib/photos.ts";
+import PrevNextPhoto from "./PrevNextPhoto.astro";
+import type { Photo } from "@src/env";
+
+interface Props {
+  photo: Photo;
+}
+
+const { photo } = Astro.props as Props;
+const previousPhoto = getPreviousPhoto(photo);
+const nextPhoto = getNextPhoto(photo);
+---
+
+<div
+  class:list={[
+    "mx-2 sm:mx-0 p-2 rounded-sm",
+    "bg-light-secondary dark:bg-dark-secondary",
+  ]}
+>
+  <div class="flex flex-wrap items-center justify-center">
+    <div class="w-ull lg:w-6/8">
+      <Image
+        src={photo.import()}
+        alt={photo.name}
+        width={1024}
+        class="rounded-sm"
+      />
+    </div>
+
+    <div
+      class:list={[
+        "w-1/2 lg:w-1/8 mt-2 lg:mt-0 lg:order-first",
+        "lg:translate-x-3 lg:scale-120",
+      ]}
+    >
+      {previousPhoto && <PrevNextPhoto photo={previousPhoto} />}
+    </div>
+
+    <div
+      class:list={[
+        "w-1/2 lg:w-1/8 mt-2 lg:mt-0 text-right",
+        "lg:-translate-x-3 lg:scale-120",
+      ]}
+    >
+      {nextPhoto && <PrevNextPhoto photo={nextPhoto} />}
+    </div>
+  </div>
+</div>

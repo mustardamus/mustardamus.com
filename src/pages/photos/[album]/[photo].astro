@@ -1,13 +1,7 @@
 ---
-import { Image } from "astro:assets";
-import {
-  getAlbumPhotos,
-  getAlbumPhoto,
-  getSubAlbum,
-  getPreviousPhoto,
-  getNextPhoto,
-} from "@src/lib/photos.ts";
+import { getAlbumPhotos, getAlbumPhoto, getSubAlbum } from "@src/lib/photos.ts";
 import Layout from "@src/layouts/Layout.astro";
+import GalleryShow from "@src/components/Gallery/Show.astro";
 import GalleryIndex from "@src/components/Gallery/Index.astro";
 import type { GetStaticPaths } from "astro";
 import type { Photo, SubAlbum } from "@src/env";
@@ -29,42 +23,16 @@ export const getStaticPaths = (() => {
 
 const { album, photo } = Astro.params as Params;
 const photoObj = getAlbumPhoto(album, photo);
-let subAlbum: SubAlbum | undefined;
-let previousPhoto: Photo | undefined;
-let nextPhoto: Photo | undefined;
-
-if (photoObj) {
-  subAlbum = getSubAlbum(album, photoObj.subAlbum);
-  previousPhoto = getPreviousPhoto(photoObj);
-  nextPhoto = getNextPhoto(photoObj);
-}
+const subAlbum: SubAlbum | undefined =
+  photoObj && getSubAlbum(album, photoObj.subAlbum);
 ---
 
 <Layout>
-  <div class="flex">
-    <div>
-      {
-        previousPhoto && (
-          <a href={`/photos/${album}/${previousPhoto.name}`}>
-            <Image src={previousPhoto.import()} alt={previousPhoto.name} />
-          </a>
-        )
-      }
-    </div>
-    <div>
-      {
-        nextPhoto && (
-          <a href={`/photos/${album}/${nextPhoto.name}`}>
-            <Image src={nextPhoto.import()} alt={nextPhoto.name} />
-          </a>
-        )
-      }
-    </div>
+  <div class="mt-5">
+    {photoObj && <GalleryShow photo={photoObj} />}
   </div>
 
-  {photoObj && <Image src={photoObj.import()} alt={photoObj.name} />}
-
-  <div class="my-4">
+  <div class="my-10">
     {subAlbum && <GalleryIndex {subAlbum} showBackLink={true} />}
   </div>
 </Layout>
