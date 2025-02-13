@@ -1,0 +1,47 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  href: string;
+  icon: string;
+  title: string;
+  bgClass?: string;
+  isActive?: boolean;
+}
+
+const {
+  href = "",
+  icon = "",
+  title = "",
+  bgClass = "bg-light-secondary dark:bg-dark-secondary",
+  isActive = false,
+} = Astro.props as Props;
+---
+
+<a
+  {href}
+  class:list={[
+    bgClass,
+    "inline-flex py-1 px-3 items-center rounded-sm transition-all border-2 min-h-full",
+    "text-dark-primary dark:text-light-secondary",
+    "hover:bg-light-accent dark:hover:bg-dark-accent dark:hover:text-dark-primary",
+    isActive
+      ? [
+          "border-light-accent dark:border-dark-accent",
+          "hover:text-dark-primary dark:hover:text-light-secondary",
+          "hover:bg-light-primary dark:hover:bg-dark-primary",
+        ]
+      : "border-transparent",
+  ]}
+>
+  <Icon name={icon} class="sm:text-xl" />
+
+  <span
+    class:list={[
+      "pt-[1px] pl-[2px] sm:pl-1",
+      href === "/" && "hidden sm:inline-block",
+    ]}
+  >
+    {title}
+  </span>
+</a>

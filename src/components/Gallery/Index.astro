@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import IconLink from "../IconLink.astro";
 import type { SubAlbum } from "@src/env";
 
 interface Props {
@@ -13,7 +14,7 @@ let title = nameSplit[0];
 let subTitle = nameSplit.length !== 1 && nameSplit[1];
 ---
 
-<div class="flex items-center">
+<div class="flex items-center px-2 sm:px-0">
   <div class="w-1/2 pb-4">
     <h2
       class:list={[
@@ -29,15 +30,17 @@ let subTitle = nameSplit.length !== 1 && nameSplit[1];
   {
     showBackLink && (
       <div class="w-1/2 text-right">
-        <a href={`/photos/${subAlbum?.photos[0]?.album}`}>
-          All photos in album
-        </a>
+        <IconLink
+          href={`/photos/${subAlbum?.photos[0]?.album}`}
+          title="All photos in album"
+          icon="solar:album-bold-duotone"
+        />
       </div>
     )
   }
 </div>
 
-<ul class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-1">
+<ul class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-1 px-2 sm:px-0">
   {
     subAlbum.photos.map((photo) => (
       <li>

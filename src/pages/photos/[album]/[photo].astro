@@ -63,5 +63,8 @@ if (photoObj) {
   </div>
 
   {photoObj && <Image src={photoObj.import()} alt={photoObj.name} />}
-  {subAlbum && <GalleryIndex {subAlbum} showBackLink={true} />}
+
+  <div class="my-4">
+    {subAlbum && <GalleryIndex {subAlbum} showBackLink={true} />}
+  </div>
 </Layout>
