@@ -12,12 +12,13 @@ const posts = defineCollection({
 
 const albums = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/data/albums" }),
-  schema: z.object({
-    slug: z.string(),
-    title: z.string(),
-    desc: z.string(),
-    thumbs: z.array(z.string()),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      slug: z.string(),
+      title: z.string(),
+      desc: z.string(),
+      thumb1: image(),
+    }),
 });
 
 export const collections = { posts, albums };

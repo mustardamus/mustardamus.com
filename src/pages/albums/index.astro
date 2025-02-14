@@ -3,14 +3,8 @@ import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import Layout from "@src/layouts/Layout.astro";
 import type { CollectionEntry } from "astro:content";
-import { getAlbumPhotos } from "@src/lib/albums";
 
 const albums: CollectionEntry<"albums">[] = await getCollection("albums");
-
-function getThumbImage(album: string, thumb: string) {
-  const photos = getAlbumPhotos(album);
-  return photos.find((p) => p.path.includes(thumb));
-}
 ---
 
 <Layout>
@@ -21,14 +15,7 @@ function getThumbImage(album: string, thumb: string) {
           <a href={`/albums/${album.data.slug}`}>{album.data.title}</a>
           {album.data.desc}
 
-          {album.data.thumbs.map((thumb) => (
-            <div>
-              <Image
-                src={getThumbImage(album.data.slug, thumb)?.import()}
-                alt=""
-              />
-            </div>
-          ))}
+          <Image src={album.data.thumb1} alt="" />
         </li>
       ))
     }
