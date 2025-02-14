@@ -15,6 +15,8 @@ const albums = defineCollection({
   schema: z.object({
     slug: z.string(),
     title: z.string(),
+    desc: z.string(),
+    thumbs: z.array(z.string()),
   }),
 });
 
