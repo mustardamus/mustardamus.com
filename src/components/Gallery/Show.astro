@@ -31,8 +31,8 @@ const nextPhoto = getNextPhoto(photo);
 
     <div
       class:list={[
-        "w-1/2 mt-2 lg:h-0 lg:pt-1",
-        "-translate-x-4 lg:-translate-y-160",
+        "w-1/2 mt-2 lg:mt-0 lg:h-0",
+        "-translate-x-4 lg:-translate-y-157",
       ]}
     >
       {previousPhoto && <PrevNextPhoto photo={previousPhoto} />}
@@ -40,8 +40,8 @@ const nextPhoto = getNextPhoto(photo);
 
     <div
       class:list={[
-        "w-1/2 mt-2 text-right lg:h-0 lg:pt-1",
-        "translate-x-4 lg:-translate-y-160",
+        "w-1/2 mt-2 lg:mt-0 text-right lg:h-0",
+        "translate-x-4 lg:-translate-y-157",
       ]}
     >
       {nextPhoto && <PrevNextPhoto photo={nextPhoto} isNext={true} />}
