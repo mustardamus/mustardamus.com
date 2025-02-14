@@ -7,6 +7,7 @@ export function getAlbumPhotos(album: string): Photo[] {
   );
 
   return Object.keys(images)
+    .filter((p) => p.includes(".JPG")) // somehow does nt work with glob() matching
     .filter((p) => p.includes(`/${album}/`))
     .map((imagePath) => {
       const pathSplit = imagePath.split("/");

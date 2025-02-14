@@ -1,23 +1,35 @@
 ---
+import { getCollection, getEntry, render } from "astro:content";
 import Layout from "@src/layouts/Layout.astro";
 import GalleryIndex from "@src/components/Gallery/Index.astro";
 import { getAlbumSorted } from "@src/lib/photos.ts";
 import type { GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
 
 interface Params {
   album: string;
 }
 
-export const getStaticPaths = (() => {
-  return [{ params: { album: "digital-nomad" } }];
+export const getStaticPaths = (async () => {
+  const photos: CollectionEntry<"photos">[] = await getCollection("photos");
+  return photos.map((album) => ({ params: { album: album.data.slug } }));
 }) satisfies GetStaticPaths;
 
 const { album } = Astro.params as Params;
-const albumObj = getAlbumSorted(album);
+const albumEntry = await getEntry("photos", album);
+
+if (!albumEntry) {
+  throw Error("Could not find album");
+}
+
+const { Content } = await render(albumEntry);
+const albumSorted = getAlbumSorted(album);
 ---
 
 <Layout>
-  <h1 class="text-4xl">{albumObj.name}</h1>
+  <h1 class="text-4xl">{albumEntry.data.title}</h1>
 
-  {albumObj.subAlbums.map((subAlbum) => <GalleryIndex {subAlbum} />)}
+  <Content />
+
+  {albumSorted.subAlbums.map((subAlbum) => <GalleryIndex {subAlbum} />)}
 </Layout>

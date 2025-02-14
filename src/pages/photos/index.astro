@@ -1,7 +1,19 @@
 ---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import Layout from "@src/layouts/Layout.astro";
+
+const photos: CollectionEntry<"photos">[] = await getCollection("photos");
 ---
 
 <Layout>
-  <a href="/photos/digital-nomad">Digital Nomad</a>
+  <ul>
+    {
+      photos.map((album) => (
+        <li>
+          <a href={`/photos/${album.data.slug}`}>{album.data.title}</a>
+        </li>
+      ))
+    }
+  </ul>
 </Layout>
