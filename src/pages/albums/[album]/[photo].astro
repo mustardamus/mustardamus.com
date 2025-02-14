@@ -1,0 +1,51 @@
+---
+import { getEntry } from "astro:content";
+import {
+  getPhotosStaticPaths,
+  getAlbumPhoto,
+  getSubAlbum,
+} from "@src/lib/albums.ts";
+import Layout from "@src/layouts/Layout.astro";
+import GalleryShow from "@src/components/Gallery/Show.astro";
+import GalleryIndex from "@src/components/Gallery/Index.astro";
+import type { Photo } from "@src/env";
+
+interface Params {
+  album: string;
+  photo: string;
+}
+
+export const getStaticPaths = getPhotosStaticPaths();
+const { album, photo } = Astro.params as Params;
+const albumEntry = await getEntry("albums", album);
+
+if (!albumEntry) {
+  throw new Error("Can not find album");
+}
+
+const photoObj = getAlbumPhoto(album, photo);
+
+if (!photoObj) {
+  throw new Error("Can not find photo");
+}
+
+const subAlbum = getSubAlbum(album, photoObj.subAlbum);
+
+if (!subAlbum) {
+  throw new Error("Can not find sub-ablum");
+}
+---
+
+<Layout>
+  <div class="mt-5">
+    <GalleryShow photo={photoObj} />
+  </div>
+
+  <div class="my-10">
+    <GalleryIndex
+      albumTitle={albumEntry.data.title}
+      {subAlbum}
+      showBackLink={true}
+    />
+  </div>
+</Layout>

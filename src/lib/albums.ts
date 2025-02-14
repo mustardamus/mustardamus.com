@@ -1,9 +1,12 @@
+import { getCollection } from "astro:content";
 import type { ImageMetadata } from "astro";
+import type { GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
 import type { Photo, SubAlbum, Album } from "../env.d.ts";
 
 export function getAlbumPhotos(album: string): Photo[] {
   const images = import.meta.glob<{ default: ImageMetadata }>(
-    "/src/data/photos/**/*",
+    "/src/data/albums/**/*",
   );
 
   return Object.keys(images)
@@ -70,4 +73,23 @@ export function getNextPhoto(photo: Photo): Photo | undefined {
   }
 
   return photos.at(index);
+}
+
+export function getAlbumsStaticPaths() {
+  return (async () => {
+    const photos: CollectionEntry<"albums">[] = await getCollection("albums");
+    return photos.map((album) => ({ params: { album: album.data.slug } }));
+  }) satisfies GetStaticPaths;
+}
+
+export function getPhotosStaticPaths() {
+  return (async () => {
+    const albums = await getAlbumsStaticPaths()();
+
+    return albums.flatMap((album) => {
+      return getAlbumPhotos(album.params.album).map((photo) => {
+        return { params: { album: photo.album, photo: photo.name } };
+      });
+    });
+  }) satisfies GetStaticPaths;
 }

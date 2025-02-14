@@ -4,11 +4,12 @@ import IconLink from "../IconLink.astro";
 import type { SubAlbum } from "@src/env";
 
 interface Props {
+  albumTitle: string;
   subAlbum: SubAlbum;
   showBackLink?: boolean;
 }
 
-const { subAlbum, showBackLink = false } = Astro.props as Props;
+const { albumTitle, subAlbum, showBackLink = false } = Astro.props as Props;
 const nameSplit = subAlbum.name.split("_");
 let title = nameSplit[0];
 let subTitle = nameSplit.length !== 1 && nameSplit[1];
@@ -31,8 +32,8 @@ let subTitle = nameSplit.length !== 1 && nameSplit[1];
     showBackLink && (
       <div class="w-1/2 text-right">
         <IconLink
-          href={`/photos/${subAlbum?.photos[0]?.album}`}
-          title="All photos in album"
+          href={`/albums/${subAlbum?.photos[0]?.album}`}
+          title={`All photos in ${albumTitle}`}
           icon="solar:album-bold-duotone"
         />
       </div>
@@ -45,7 +46,7 @@ let subTitle = nameSplit.length !== 1 && nameSplit[1];
     subAlbum.photos.map((photo) => (
       <li>
         <a
-          href={`/photos/${photo.album}/${photo.name}`}
+          href={`/albums/${photo.album}/${photo.name}`}
           class:list={[
             "block rounded-sm p-1 transition-all",
             "bg-light-secondary dark:bg-dark-secondary",

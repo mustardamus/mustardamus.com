@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import Layout from "@src/layouts/Layout.astro";
 
-const photos: CollectionEntry<"photos">[] = await getCollection("photos");
+const photos: CollectionEntry<"albums">[] = await getCollection("albums");
 ---
 
 <Layout>
@@ -11,7 +11,7 @@ const photos: CollectionEntry<"photos">[] = await getCollection("photos");
     {
       photos.map((album) => (
         <li>
-          <a href={`/photos/${album.data.slug}`}>{album.data.title}</a>
+          <a href={`/albums/${album.data.slug}`}>{album.data.title}</a>
         </li>
       ))
     }
