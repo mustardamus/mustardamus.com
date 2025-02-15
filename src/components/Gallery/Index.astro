@@ -41,7 +41,7 @@ let subTitle = nameSplit.length !== 1 && nameSplit[1];
     subAlbum.photos.map((photo) => (
       <li>
         <a
-          href={`/albums/${photo.album}/${photo.name}`}
+          href={`/albums/${photo.album}/${photo.name}#photo`}
           class:list={[
             "block rounded-sm p-1 transition-all",
             "bg-light-secondary dark:bg-dark-secondary",
