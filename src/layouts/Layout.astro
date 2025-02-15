@@ -4,10 +4,17 @@ import NavBar from "@src/components/NavBar/NavBar.astro";
 import Footer from "@src/components/Footer/Footer.astro";
 import type { Link } from "@src/env";
 
+interface Props {
+  title: string;
+}
+
+const { title = "" } = Astro.props;
+
 const topLinks: Link[] = [
   { title: "Home", href: "/", icon: "solar:home-bold-duotone" },
   { title: "Posts", href: "/posts", icon: "solar:book-bookmark-bold-duotone" },
   { title: "Albums", href: "/albums", icon: "solar:album-bold-duotone" },
+  { title: "Now", href: "/now", icon: "solar:flame-bold-duotone" },
 ];
 
 const socialLinks: Link[] = [
@@ -85,7 +92,7 @@ const techLinks: Link[] = [
     <meta name="generator" content={Astro.generator} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Mustardamus</title>
+    <title>{title} - Mustardamus</title>
   </head>
 
   <body
@@ -93,6 +100,7 @@ const techLinks: Link[] = [
     class:list={[
       "container mx-auto md:max-w-6xl md:px-4 lg:px-0",
       "bg-light-primary dark:bg-dark-primary",
+      "text-dark-primary dark:text-light-primary",
     ]}
   >
     <NavBar {topLinks} {socialLinks} />

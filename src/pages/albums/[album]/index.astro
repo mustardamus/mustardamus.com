@@ -21,7 +21,7 @@ const { Content } = await render(albumEntry);
 const albumSorted = getAlbumSorted(album);
 ---
 
-<Layout>
+<Layout title={`${albumEntry.data.title} Album`}>
   <h1 class="text-4xl">{albumEntry.data.title}</h1>
 
   <Content />

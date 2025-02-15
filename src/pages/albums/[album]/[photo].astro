@@ -36,7 +36,9 @@ if (!subAlbum) {
 }
 ---
 
-<Layout>
+<Layout
+  title={`${albumEntry.data.title} - ${subAlbum.name} - ${photoObj.name}`}
+>
   <div class="mt-5">
     <GalleryShow photo={photoObj} />
   </div>

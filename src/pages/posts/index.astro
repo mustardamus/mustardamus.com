@@ -6,7 +6,7 @@ import Layout from "@src/layouts/Layout.astro";
 const posts: CollectionEntry<"posts">[] = await getCollection("posts");
 ---
 
-<Layout>
+<Layout title="Posts">
   <ul>
     {
       posts.map((post) => (
