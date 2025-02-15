@@ -20,8 +20,8 @@ const nextPhoto = getNextPhoto(photo);
     "bg-light-secondary dark:bg-dark-secondary",
   ]}
 >
-  <div class="flex flex-wrap items-center justify-center">
-    <div class="w-full text-center">
+  <div class="relative flex flex-wrap items-center justify-center">
+    <div class="w-full text-center z-20">
       <Image
         src={photo.import()}
         alt={photo.name}
@@ -32,8 +32,8 @@ const nextPhoto = getNextPhoto(photo);
 
     <div
       class:list={[
-        "w-1/2 mt-2 lg:mt-0 lg:h-0",
-        "-translate-x-4 lg:-translate-y-157",
+        "w-1/2 mt-2 -translate-x-4 z-30",
+        "lg:w-auto lg:absolute lg:top-0 lg:-left-1 ",
       ]}
     >
       {previousPhoto && <PrevNextPhoto photo={previousPhoto} />}
@@ -41,8 +41,8 @@ const nextPhoto = getNextPhoto(photo);
 
     <div
       class:list={[
-        "w-1/2 mt-2 lg:mt-0 text-right lg:h-0",
-        "translate-x-4 lg:-translate-y-157",
+        "w-1/2 mt-2 translate-x-4 z-30 text-right",
+        "lg:w-auto lg:absolute lg:top-0 lg:-right-1 ",
       ]}
     >
       {nextPhoto && <PrevNextPhoto photo={nextPhoto} isNext={true} />}
