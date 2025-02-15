@@ -2,45 +2,31 @@
 import { execSync } from "child_process";
 import Layout from "@src/layouts/Layout.astro";
 
-const lastCommits = execSync(
-  `git log -5 --pretty=format:'{"hash": "%H", "date": "%ad", "message": "%s"}'`,
-)
-  .toString()
-  .split("\n")
-  .map((objStr: string) => {
-    const obj = JSON.parse(objStr);
-    const date = new Date(obj.date);
-    obj.date = date.toLocaleDateString("en-US", {
-      year: "2-digit",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-
-    return obj;
-  });
+const lastLogStr = execSync(
+  `git log -1 --pretty=format:'{"hash": "%H", "date": "%ai", "message": "%s"}'`,
+);
+const lastCommit = JSON.parse(lastLogStr.toString());
+const lastCommitDate = new Date(lastCommit.date);
+const lastCommitDateStr = lastCommitDate.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+});
 ---
 
 <Layout title="Now">
   <h1 class="text-4xl">Now</h1>
-  <h2 class="text-sm">Last updated at 2025-02-15</h2>
+  <h2 class="text-sm">Last updated at {lastCommitDate}</h2>
 
-  <h3 class="text-2xl">Last commits to this site</h3>
-  <ul>
-    {
-      lastCommits.map((commit) => (
-        <li>
-          <a
-            href={`https://github.com/mustardamus/mustardamus.com/commit/${commit.hash}`}
-            target="_blank"
-            class="text-sm"
-          >
-            <span class="opacity-60">{commit.date}</span>
-            <span>{commit.message}</span>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+  <h3 class="text-2xl">Last commit to this site</h3>
+  <a
+    href={`https://github.com/mustardamus/mustardamus.com/commit/${lastCommit.hash}`}
+    target="_blank"
+    class="text-sm"
+  >
+    <span class="opacity-60">{lastCommitDateStr}</span>
+    <span>{lastCommit.message}</span>
+  </a>
 </Layout>
