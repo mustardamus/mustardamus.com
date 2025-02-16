@@ -33,3 +33,4 @@
 - [CoreUI Brands Set](https://icon-sets.iconify.design/cib/)
 - [LineIcons Icon Set](https://icon-sets.iconify.design/lineicons/)
 - [Simple Icons Icon Set](https://icon-sets.iconify.design/simple-icons/)
+- [ Fluent Icon Set](https://icon-sets.iconify.design/fluent/)

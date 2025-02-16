@@ -1,6 +1,7 @@
 ---
 title: Hello World!
-createdAt: 2025-02-10
+pubDate: 2025-02-10
+description: Just for testing
 ---
 
 Ow yeah :)
