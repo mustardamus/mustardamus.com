@@ -16,7 +16,7 @@ const albums = defineCollection({
     z.object({
       slug: z.string(),
       title: z.string(),
-      desc: z.string(),
+      year: z.string(),
       thumb1: image(),
       thumb2: image(),
       thumb3: image(),

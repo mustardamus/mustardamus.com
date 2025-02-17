@@ -4,10 +4,13 @@ import Layout from "@src/layouts/Layout.astro";
 import AlbumStack from "@src/components/AlbumStack.astro";
 
 const albums: CollectionEntry<"albums">[] = await getCollection("albums");
+const albumsSorted = albums.sort((a, b) =>
+  b.data.year.localeCompare(a.data.year),
+);
 ---
 
 <Layout title="Albums">
-  <div class="space-y-20 sm:space-y-24 lg:space-y-28 my-10">
-    {albums.map((album) => <AlbumStack {album} />)}
+  <div class="space-y-0 sm:space-y-24 lg:space-y-28 my-10">
+    {albumsSorted.map((album) => <AlbumStack {album} />)}
   </div>
 </Layout>

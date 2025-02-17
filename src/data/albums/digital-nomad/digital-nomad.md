@@ -1,7 +1,7 @@
 ---
 slug: digital-nomad
 title: Digital Nomad
-desc: Traveled Europe. Party'd hard.
+year: "2013 - 2017"
 thumb1: ./Amsterdam_Netherlands/100_0468.JPG
 thumb2: ./Brussels_Belgium/100_0817.JPG
 thumb3: ./Budapest_Hungary/100_1201.JPG
