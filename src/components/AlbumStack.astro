@@ -1,0 +1,85 @@
+---
+import { Image } from "astro:assets";
+import { getEntry, render, type CollectionEntry } from "astro:content";
+import { getAlbumPhotos } from "@src/lib/albums.ts";
+import IconLink from "./IconLink.astro";
+
+interface Props {
+  album: CollectionEntry<"albums">;
+}
+
+const { album } = Astro.props as Props;
+const albumEntry = await getEntry("albums", album.id);
+
+if (!albumEntry) {
+  throw new Error("Album not found");
+}
+
+const albumPhotos = getAlbumPhotos(albumEntry.data.slug);
+const { Content } = await render(albumEntry);
+---
+
+<div class:list={["group flex flex-wrap relative"]}>
+  <div
+    class:list={[
+      "columns-2 gap-0 w-full sm:w-1/2 p-8 sm:p-4 z-40",
+      "*:rounded-sm *:transition-all *:shadow-sm",
+    ]}
+  >
+    <Image
+      src={album.data.thumb1}
+      alt=""
+      width={300}
+      class:list={["rotate-2 translate-x-1", "group-hover:rotate-4"]}
+    />
+    <Image
+      src={album.data.thumb2}
+      alt=""
+      width={300}
+      class:list={[
+        "-rotate-4 -translate-y-2 translate-x-1",
+        "group-hover:rotate-1",
+      ]}
+    />
+    <Image
+      src={album.data.thumb3}
+      alt=""
+      width={300}
+      class:list={["rotate-8 -translate-x-2", "group-hover:rotate-2"]}
+    />
+    <Image
+      src={album.data.thumb4}
+      alt=""
+      width={300}
+      class:list={[
+        "-rotate-2 -translate-y-3 -translate-x-1",
+        "group-hover:-rotate-5",
+      ]}
+    />
+  </div>
+
+  <div
+    class="w-full sm:w-1/2 sm:pt-4 lg:pt-8 z-50 absolute top-1/3 text-center"
+  >
+    <IconLink
+      href={`/albums/${albumEntry.data.slug}`}
+      title=`View ${albumPhotos.length} Photos`
+      icon="solar:album-bold-duotone"
+    />
+  </div>
+
+  <div
+    class:list={[
+      "w-full sm:w-1/2 z-30 px-6",
+      "pt-20 -translate-y-20 sm:pt-6 sm:translate-y-0",
+      "sm:rounded-sm",
+      "bg-light-secondary dark:bg-dark-secondary",
+    ]}
+  >
+    <h2 class="text-3xl text-center sm:text-left">{album.data.title}</h2>
+
+    <div class="text-sm py-6">
+      <Content />
+    </div>
+  </div>
+</div>

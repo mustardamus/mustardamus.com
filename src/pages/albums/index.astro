@@ -1,23 +1,13 @@
 ---
-import { getCollection } from "astro:content";
-import { Image } from "astro:assets";
+import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "@src/layouts/Layout.astro";
-import type { CollectionEntry } from "astro:content";
+import AlbumStack from "@src/components/AlbumStack.astro";
 
 const albums: CollectionEntry<"albums">[] = await getCollection("albums");
 ---
 
 <Layout title="Albums">
-  <ul>
-    {
-      albums.map((album) => (
-        <li>
-          <a href={`/albums/${album.data.slug}`}>{album.data.title}</a>
-          {album.data.desc}
-
-          <Image src={album.data.thumb1} alt="" />
-        </li>
-      ))
-    }
-  </ul>
+  <div class="space-y-20 sm:space-y-24 lg:space-y-28 my-10">
+    {albums.map((album) => <AlbumStack {album} />)}
+  </div>
 </Layout>
