@@ -15,9 +15,9 @@ const nextPhoto = getNextPhoto(photo);
 
 <div
   id="photo"
-  class="p-2 rounded-sm bg-light-secondary dark:bg-dark-secondary"
+  class="px-2 rounded-sm bg-light-secondary dark:bg-dark-secondary"
 >
-  <div class="lg:relative">
+  <div class="lg:relative pt-2 lg:pb-2">
     <div class="w-full text-center z-20">
       <Image
         src={photo.import()}
@@ -30,7 +30,7 @@ const nextPhoto = getNextPhoto(photo);
     <div
       class:list={[
         "flex z-30",
-        "*:w-1/2 *:mt-2 *:lg:w-auto *:lg:absolute *:lg:top-0",
+        "*:w-1/2 *:mt-2 *:lg:w-auto *:lg:absolute *:lg:top-2",
       ]}
     >
       <div class="lg:left-2">
