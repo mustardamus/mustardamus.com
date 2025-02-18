@@ -15,9 +15,9 @@ let title = nameSplit[0];
 let subTitle = nameSplit.length !== 1 && nameSplit[1];
 ---
 
-<div class="flex items-center px-2 sm:px-0">
-  <div class="w-1/2 pb-4">
-    <h2 class="text-2xl sm:text-3xl lg:text-4xl">
+<div class="flex flex-wrap items-center px-2 sm:px-0">
+  <div class="pb-4 w-full sm:w-2/5 text-center sm:text-left">
+    <h2 class:list={["text-2xl lg:text-3xl"]}>
       {title}
       {subTitle && <span class="opacity-70 text-xl">{subTitle}</span>}
     </h2>
@@ -25,10 +25,10 @@ let subTitle = nameSplit.length !== 1 && nameSplit[1];
 
   {
     showBackLink && (
-      <div class="w-1/2 text-right">
+      <div class="w-full sm:w-3/5 text-center sm:text-right grow mb-6">
         <IconLink
           href={`/albums/${subAlbum?.photos[0]?.album}`}
-          title={`All photos in ${albumTitle}`}
+          title={`Photos in '${albumTitle}'`}
           icon="solar:album-bold-duotone"
         />
       </div>
@@ -36,7 +36,9 @@ let subTitle = nameSplit.length !== 1 && nameSplit[1];
   }
 </div>
 
-<ul class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-1 px-1 sm:px-0">
+<ul
+  class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-1 px-1 sm:px-0 pb-8"
+>
   {
     subAlbum.photos.map((photo) => (
       <li>

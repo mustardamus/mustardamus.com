@@ -10,7 +10,7 @@ const albumsSorted = albums.sort((a, b) =>
 ---
 
 <Layout title="Albums">
-  <div class="space-y-0 sm:space-y-24 lg:space-y-28 my-10">
+  <div class="space-y-0 sm:space-y-20 lg:space-y-28">
     {albumsSorted.map((album) => <AlbumStack {album} />)}
   </div>
 </Layout>

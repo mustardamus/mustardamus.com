@@ -11,7 +11,6 @@ interface Props {
 const { title = "" } = Astro.props;
 
 const topLinks: Link[] = [
-  { title: "Home", href: "/", icon: "solar:home-bold-duotone" },
   { title: "Posts", href: "/posts", icon: "solar:book-bookmark-bold-duotone" },
   { title: "Albums", href: "/albums", icon: "solar:album-bold-duotone" },
   { title: "Now", href: "/now", icon: "solar:flame-bold-duotone" },
@@ -106,7 +105,7 @@ const techLinks: Link[] = [
   >
     <NavBar {topLinks} {socialLinks} />
 
-    <main>
+    <main class="my-10 sm:my-18 lg:my-20">
       <slot />
     </main>
 

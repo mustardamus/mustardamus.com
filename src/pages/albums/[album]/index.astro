@@ -22,13 +22,19 @@ const albumSorted = getAlbumSorted(album);
 ---
 
 <Layout title={`${albumEntry.data.title} Album`}>
-  <h1 class="text-4xl">{albumEntry.data.title}</h1>
+  <h1 class="text-3xl sm:text-4xl px-2 sm:px-0">{albumEntry.data.title}</h1>
 
-  <Content />
+  <div class="px-2 sm:px-0 mb-6">
+    <Content />
+  </div>
 
-  {
-    albumSorted.subAlbums.map((subAlbum) => (
-      <GalleryIndex albumTitle={albumEntry.data.title} {subAlbum} />
-    ))
-  }
+  <div class="space-y-10">
+    {
+      albumSorted.subAlbums.map((subAlbum) => (
+        <div>
+          <GalleryIndex albumTitle={albumEntry.data.title} {subAlbum} />
+        </div>
+      ))
+    }
+  </div>
 </Layout>
