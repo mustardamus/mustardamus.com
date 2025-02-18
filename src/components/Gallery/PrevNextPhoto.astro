@@ -13,32 +13,35 @@ const { photo, isNext = false } = Astro.props as Props;
 
 <a
   href={`/albums/${photo.album}/${photo.name}#photo`}
-  class="group inline-flex items-center rounded-sm transition-all"
+  class:list={[
+    "group relative inline-block w-[180px] h-[121px] p-0.5",
+    "rounded-sm transition-all",
+    "bg-light-primary dark:bg-dark-primary",
+    "lg:bg-light-secondary lg:dark:bg-dark-secondary",
+    "hover:bg-light-accent dark:hover:bg-dark-accent",
+  ]}
 >
-  <Icon
-    name={`solar:round-alt-arrow-${isNext ? "right" : "left"}-bold`}
-    size={28}
-    class:list={[
-      "rounded-full transition-all",
-      "bg-light-secondary dark:bg-dark-secondary",
-      "text-dark-secondary dark:text-light-secondary",
-      "group-hover:text-light-accent group-hover:dark:text-light-accent",
-      isNext
-        ? ["order-2 -translate-x-3 group-hover:-translate-x-1"]
-        : ["translate-x-3 group-hover:translate-x-1"],
-    ]}
-  />
-  <span
-    class:list={[
-      "lg:p-0.5 lg:rounded-sm",
-      "lg:bg-light-secondary lg:dark:bg-dark-secondary",
-    ]}
-  >
-    <Image
-      src={photo.import()}
-      alt={photo.name}
-      width={180}
-      class="rounded-sm"
-    />
-  </span>
+  <Image src={photo.import()} alt={photo.name} width={180} class="rounded-sm" />
+
+  <div class:list={["absolute w-full h-full top-0 left-0 flex items-center"]}>
+    <div
+      class:list={[
+        "w-full inline-flex",
+        isNext ? "justify-end" : "justify-start",
+      ]}
+    >
+      <Icon
+        name={`solar:round-alt-arrow-${isNext ? "right" : "left"}-bold`}
+        size={28}
+        class:list={[
+          "rounded-full transition-all",
+          "bg-light-secondary dark:bg-dark-secondary",
+          "group-hover:bg-light-accent dark:group-hover:bg-dark-accent",
+          isNext
+            ? "-translate-x-2 group-hover:translate-x-2"
+            : "translate-x-2 group-hover:-translate-x-2",
+        ]}
+      />
+    </div>
+  </div>
 </a>

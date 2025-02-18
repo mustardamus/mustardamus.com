@@ -17,7 +17,7 @@ const nextPhoto = getNextPhoto(photo);
   id="photo"
   class="p-2 rounded-sm bg-light-secondary dark:bg-dark-secondary"
 >
-  <div class="relative">
+  <div class="lg:relative">
     <div class="w-full text-center z-20">
       <Image
         src={photo.import()}
@@ -33,11 +33,11 @@ const nextPhoto = getNextPhoto(photo);
         "*:w-1/2 *:mt-2 *:lg:w-auto *:lg:absolute *:lg:top-0",
       ]}
     >
-      <div class="-translate-x-4 lg:-left-1">
+      <div class="lg:left-2">
         {previousPhoto && <PrevNextPhoto photo={previousPhoto} />}
       </div>
 
-      <div class="translate-x-4 text-right lg:-right-1" ]}>
+      <div class="text-right lg:right-2" ]}>
         {nextPhoto && <PrevNextPhoto photo={nextPhoto} isNext={true} />}
       </div>
     </div>
