@@ -2,18 +2,91 @@
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import Layout from "@src/layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
 
 const posts: CollectionEntry<"posts">[] = await getCollection("posts");
+const sortedPosts = posts.sort((a, b) => 
+  b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
 ---
 
 <Layout title="Posts">
-  <ul>
-    {
-      posts.map((post) => (
-        <li>
-          <a href={`/posts/${post.id}`}>{post.data.title}</a>
-        </li>
-      ))
-    }
-  </ul>
+  <div class:list={["max-w-6xl", "mx-auto", "px-4", "sm:px-6", "lg:px-8"]}>
+    <div class:list={["py-8", "sm:py-12"]}>
+      <h1 class:list={[
+        "text-3xl", "sm:text-4xl", "font-bold", 
+        "text-dark-primary", "dark:text-light-primary", 
+        "mb-8", "sm:mb-12"
+      ]}>
+        Blog Posts
+      </h1>
+      
+      <div class:list={[
+        "grid", "grid-cols-1", "lg:grid-cols-2", "gap-8", "lg:gap-12"
+      ]}>
+        {sortedPosts.map((post) => (
+          <article class:list={[
+            "bg-light-primary", "dark:bg-dark-secondary", "rounded-lg", 
+            "shadow-md", "hover:shadow-lg", "transition-shadow", 
+            "duration-300", "overflow-hidden"
+          ]}>
+            <div class:list={["p-6", "sm:p-8"]}>
+              <div class:list={["mb-4"]}>
+                <time 
+                  class:list={[
+                    "text-sm", "text-stone-500", "dark:text-stone-400"
+                  ]} 
+                  datetime={post.data.pubDate.toISOString()}
+                >
+                  {post.data.pubDate.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                  })}
+                </time>
+              </div>
+              
+              <h2 class:list={[
+                "text-xl", "sm:text-2xl", "font-bold", 
+                "text-dark-primary", "dark:text-light-primary", "mb-3", 
+                "hover:text-light-accent", "dark:hover:text-dark-accent", 
+                "transition-colors"
+              ]}>
+                <a href={`/posts/${post.id}`} class:list={["block"]}>
+                  {post.data.title}
+                </a>
+              </h2>
+              
+              <p class:list={[
+                "text-stone-600", "dark:text-stone-300", "mb-6", 
+                "leading-relaxed"
+              ]}>
+                {post.data.excerpt || post.data.description}
+              </p>
+              
+              <div class:list={["flex", "justify-end"]}>
+                <a 
+                  href={`/posts/${post.id}`}
+                  class:list={[
+                    "inline-flex", "items-center", "px-4", "py-2", 
+                    "bg-light-accent", "hover:bg-orange-600", 
+                    "text-white", "font-medium", "rounded-lg", 
+                    "transition-colors", "duration-200", "focus:ring-2", 
+                    "focus:ring-light-accent", "focus:ring-offset-2", 
+                    "dark:focus:ring-offset-dark-secondary"
+                  ]}
+                >
+                  Read
+                  <Icon 
+                    name="solar:arrow-right-linear" 
+                    class:list={["ml-2", "w-4", "h-4"]} 
+                  />
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
 </Layout>
