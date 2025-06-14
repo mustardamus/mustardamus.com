@@ -16,6 +16,24 @@ const { Content } = await render(post);
 ---
 
 <Layout title={postEntry.data.title}>
-  <h1>{post.data.title}</h1>
-  <Content />
+  <div id="post">
+    <div class="post-meta">
+      <h1>{postEntry.data.title}</h1>
+      <div class="post-date">
+        {postEntry.data.pubDate.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long', 
+          day: 'numeric'
+        })}
+      </div>
+      {postEntry.data.description && (
+        <div class="post-description">{postEntry.data.description}</div>
+      )}
+    </div>
+    <Content />
+  </div>
 </Layout>
+
+<style>
+  @import "@src/assets/css/post.css";
+</style>

@@ -1,0 +1,136 @@
+@reference "@src/assets/css/global.css";
+
+/* Blog post content styling */
+#post {
+  @apply px-2 sm:px-0 py-8;
+}
+
+#post h1 {
+  @apply text-4xl font-bold mb-8;
+  @apply text-dark-primary dark:text-light-primary;
+  @apply leading-tight;
+}
+
+#post h2 {
+  @apply text-3xl font-bold mt-12 mb-6;
+  @apply text-dark-primary dark:text-light-primary;
+  @apply leading-tight;
+}
+
+#post h3 {
+  @apply text-2xl font-semibold mt-8 mb-4;
+  @apply text-dark-primary dark:text-light-primary;
+  @apply leading-tight;
+}
+
+#post h4 {
+  @apply text-xl font-semibold mt-6 mb-3;
+  @apply text-dark-primary dark:text-light-primary;
+  @apply leading-tight;
+}
+
+#post h5 {
+  @apply text-lg font-semibold mt-4 mb-2;
+  @apply text-dark-primary dark:text-light-primary;
+  @apply leading-tight;
+}
+
+#post h6 {
+  @apply text-base font-semibold mt-3 mb-2;
+  @apply text-dark-primary dark:text-light-primary;
+  @apply leading-tight;
+}
+
+#post p {
+  @apply mb-6 leading-relaxed text-lg;
+  @apply text-stone-700 dark:text-stone-300;
+}
+
+#post a {
+  @apply text-light-accent dark:text-dark-accent underline;
+  @apply hover:text-orange-600 dark:hover:text-orange-400;
+  @apply transition-colors duration-200;
+}
+
+#post ul {
+  @apply mb-6 pl-8;
+}
+
+#post ol {
+  @apply mb-6 pl-8;
+}
+
+#post ul li {
+  @apply mb-3 list-disc text-lg;
+  @apply text-stone-700 dark:text-stone-300;
+  @apply leading-relaxed;
+}
+
+#post ol li {
+  @apply mb-3 list-decimal text-lg;
+  @apply text-stone-700 dark:text-stone-300;
+  @apply leading-relaxed;
+}
+
+#post blockquote {
+  @apply border-l-4 border-light-accent dark:border-dark-accent;
+  @apply pl-6 py-3 my-6;
+  @apply bg-light-secondary dark:bg-dark-secondary;
+  @apply italic text-lg;
+  @apply text-stone-700 dark:text-stone-300;
+}
+
+#post blockquote p {
+  @apply mb-0;
+}
+
+#post table {
+  @apply w-full mb-6 border-collapse;
+  @apply bg-light-primary dark:bg-dark-secondary;
+  @apply rounded-lg overflow-hidden;
+}
+
+#post th {
+  @apply bg-light-secondary dark:bg-dark-primary;
+  @apply px-4 py-3 text-left font-semibold;
+  @apply text-dark-primary dark:text-light-primary;
+  @apply border-b border-stone-300 dark:border-stone-600;
+}
+
+#post td {
+  @apply px-4 py-3 border-b border-stone-200 dark:border-stone-700;
+  @apply text-stone-700 dark:text-stone-300;
+}
+
+#post hr {
+  @apply my-12 border-0 h-px;
+  @apply bg-stone-300 dark:bg-stone-600;
+}
+
+#post img {
+  @apply max-w-full h-auto rounded-lg shadow-md;
+  @apply mx-auto my-8;
+}
+
+#post strong {
+  @apply font-bold text-dark-primary dark:text-light-primary;
+}
+
+#post em {
+  @apply italic;
+}
+
+#post .post-meta {
+  @apply mb-8 pb-6;
+  @apply border-b border-stone-200 dark:border-stone-700;
+}
+
+#post .post-date {
+  @apply text-base text-stone-500 dark:text-stone-400;
+  @apply font-medium;
+}
+
+#post .post-description {
+  @apply text-xl text-stone-600 dark:text-stone-400;
+  @apply mt-2 italic;
+}
